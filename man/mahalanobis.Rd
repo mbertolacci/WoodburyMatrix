@@ -7,7 +7,7 @@
 \usage{
 mahalanobis(x, center, cov, inverted = FALSE, ...)
 
-\S4method{mahalanobis}{ANY,ANY,SWoodburyMatrix}(x, center, cov, inverted = FALSE, method = 1, ...)
+\S4method{mahalanobis}{ANY,ANY,SWoodburyMatrix}(x, center, cov, inverted = FALSE, ...)
 }
 \arguments{
 \item{x}{Numeric vector or matrix}
@@ -32,5 +32,5 @@ squared Mahalanobis distance with the implicit matrix as the covariance.
 }}
 
 \seealso{
-\link[base]{mahalanobis}
+\link[stats]{mahalanobis}
 }

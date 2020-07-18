@@ -9,7 +9,7 @@
 #' @param inverted Whether to treat \code{cov} as a precision matrix; must be
 #' \code{FALSE} for \code{SWoodburyMatrix} objects.
 #' @param ... Passed to the \code{\link[Matrix]{Cholesky}} function.
-#' @seealso \link[base]{mahalanobis}
+#' @seealso \link[stats]{mahalanobis}
 #' @export
 setGeneric('mahalanobis')
 
@@ -19,7 +19,7 @@ setGeneric('mahalanobis')
 setMethod(
   'mahalanobis',
   signature(x = 'ANY', center = 'ANY', cov = 'SWoodburyMatrix'),
-  function(x, center, cov, inverted = FALSE, method = 1, ...) {
+  function(x, center, cov, inverted = FALSE, ...) {
     stopifnot(!inverted)
 
     if (is.matrix(x)) {

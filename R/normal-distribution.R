@@ -48,7 +48,7 @@ rWnorm <- function(n, mean, covariance) {
 }
 
 .sample_Q <- function(n, Q) {
-  z <- matrix(rnorm(n * nrow(Q)), nrow = nrow(Q))
+  z <- matrix(stats::rnorm(n * nrow(Q)), nrow = nrow(Q))
 
   if (is(Q, 'denseMatrix')) {
     solve(chol(Q), z)

@@ -25,20 +25,9 @@ test_that('rWnorm return value has correct dimensions', {
   n <- 100
 
   check_shapes <- function(W) {
-    expect_vector(
-      rWnorm(1, covariance = W),
-      ptype = numeric(),
-      size = n
-    )
-    expect_vector(
-      rWnorm(1, 1, W),
-      ptype = numeric(),
-      size = n
-    )
-    expect_equal(
-      dim(rWnorm(2, 1, W)),
-      c(2, n)
-    )
+    expect_length(rWnorm(1, covariance = W), n)
+    expect_length(rWnorm(1, 1, W), n)
+    expect_equal(dim(rWnorm(2, 1, W)), c(2, n))
   }
 
   D <- Diagonal(n)
