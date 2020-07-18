@@ -1,5 +1,5 @@
 Package: WoodburyMatrix
-Title: What the Package Does (One Line, Title Case)
+Title: Fast matrix operations via the Woodbury matrix identity
 Version: 0.0.1
 Authors@R:
     person(given = "Michael",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "m.bertolacci@gmail.com",
            comment = c(ORCID = "0000-0003-0317-5941"))
-Description: What the package does (one paragraph).
+Description: A hierarchy of classes and methods for manipulating matrices formed implicitly from the sums of the inverses of other matrices, a situation commonly encountered in spatial statistics and related fields. Enables easy use of the Woodbury matrix identity and the matrix determinant lemma to allow computation (e.g., solving linear systems) without having to form the actual matrix.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

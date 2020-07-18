@@ -7,7 +7,7 @@
 \alias{solve,GWoodburyMatrix,ANY-method}
 \alias{solve,SWoodburyMatrix,missing-method}
 \alias{solve,SWoodburyMatrix,ANY-method}
-\title{Solve methods for \code{WoodburyMatrix} subclasses}
+\title{Solve methods for \code{WoodburyMatrix} objects}
 \usage{
 \S4method{solve}{GWoodburyMatrix,missing}(a)
 

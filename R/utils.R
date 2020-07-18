@@ -1,11 +1,5 @@
-.try_Cholesky <- function(...) {
-  tryCatch(
-    Cholesky(...),
-    error = function(e) {},
-    warning = function(w) {}
-  )
-}
-
-.chol_Linv_P <- function(a, b) {
-  solve(a, solve(a, b, system = 'P'), system = 'L')
+.recycle_vector_to <- function(x, to_length) {
+  x[
+    ((seq_len(to_length) - 1) %% length(x)) + 1
+  ]
 }

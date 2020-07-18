@@ -1,6 +1,6 @@
 #' @name solve-methods
 #' @aliases solve
-#' @title Solve methods for \code{WoodburyMatrix} subclasses
+#' @title Solve methods for \code{WoodburyMatrix} objects
 #' @description
 #' Methods based on \code{\link{solve}} to solve a linear system of equations
 #' involving \code{\linkS4class{WoodburyMatrix}} objects. These methods take
@@ -51,19 +51,7 @@ setMethod(
   signature(a = 'SWoodburyMatrix', b = 'missing'),
   function(a, ...) {
     Xt_A <- crossprod(a@X, a@A)
-    chol_O <- .try_Cholesky(a@O, LDL = FALSE, ...)
-    if (!is.null(chol_O)) {
-      # Based on:
-      # O = P'LL'P
-      # O^{-1} = P'L^{-T}L^{-1}P
-      # This forces symmetry in fully numeric manner
-      a@A - crossprod(.chol_Linv_P(
-        chol_O,
-        Xt_A
-      ))
-    } else {
-      a@A - forceSymmetric(crossprod(Xt_A, solve(a@O, Xt_A)))
-    }
+    a@A - forceSymmetric(crossprod(Xt_A, solve(a@O, Xt_A)))
   }
 )
 

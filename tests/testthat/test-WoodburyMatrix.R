@@ -2,6 +2,10 @@ context('WoodburyMatrix')
 
 load('matrices.rda')
 
+expect_Matrix_equal <- function(a, b) {
+  expect_equal(max(abs(a - b)), 0)
+}
+
 compare_to_direct <- function(
   A,
   B,
@@ -19,16 +23,16 @@ compare_to_direct <- function(
   }
   b <- rnorm(nrow(A))
 
-  expect_equal(max(abs(instantiate(W) - W_direct)), 0)
+  expect_Matrix_equal(instantiate(W), W_direct)
   expect_equal(W %*% b, W_direct %*% b)
   expect_equal(determinant(W), determinant(W_direct))
   expect_equal(
     determinant(W, logarithm = FALSE),
     determinant(W_direct, logarithm = FALSE)
   )
-  expect_equal(max(abs(solve(W) - solve(W_direct))), 0)
+  expect_Matrix_equal(solve(W), solve(W_direct))
   expect_equal(solve(W, b), solve(W_direct, b))
-  expect_equal(max(abs(instantiate(t(W)) - t(W_direct))), 0)
+  expect_Matrix_equal(instantiate(t(W)), t(W_direct))
   if (symmetric) {
     expect_equal(
       mahalanobis(b, center = 0, cov = W),
@@ -47,13 +51,10 @@ test_that('GWoodbury with diagonal matrices', {
 })
 
 test_that('GWoodbury with general matrices', {
-  n <- 100
   compare_to_direct(G_100, G_100)
 })
 
 test_that('GWoodbury with general matrices and U and V', {
-  n <- 100
-  p <- 50
   compare_to_direct(
     G_100,
     G_50,
@@ -63,7 +64,6 @@ test_that('GWoodbury with general matrices and U and V', {
 })
 
 test_that('SWoodbury operations with negative semidefinite matrices', {
-  n <- 100
   compare_to_direct(
     S_100_nd,
     S_100_nd,
@@ -72,8 +72,6 @@ test_that('SWoodbury operations with negative semidefinite matrices', {
 })
 
 test_that('SWoodbury operations with negative semidefinite matrices and X', {
-  n <- 100
-  p <- 50
   compare_to_direct(
     S_100_nd,
     S_50_nd,
@@ -83,7 +81,6 @@ test_that('SWoodbury operations with negative semidefinite matrices and X', {
 })
 
 test_that('SWoodbury operations with positive semidefinite matrices', {
-  n <- 100
   compare_to_direct(
     S_100_pd,
     S_100_pd,
@@ -92,8 +89,6 @@ test_that('SWoodbury operations with positive semidefinite matrices', {
 })
 
 test_that('SWoodbury operations with positive semidefinite matrices and X', {
-  n <- 100
-  p <- 50
   compare_to_direct(
     S_100_pd,
     S_50_pd,
@@ -103,8 +98,7 @@ test_that('SWoodbury operations with positive semidefinite matrices and X', {
 })
 
 test_that('Creation fails when both U/V and X are provided', {
-  n <- 100
-  A <- Diagonal(n)
+  A <- Diagonal(100)
   expect_error(WoodburyMatrix(A, A, U = A, X = A))
   expect_error(WoodburyMatrix(A, A, V = A, X = A))
   expect_error(WoodburyMatrix(A, A, U = A, V = A, X = A))
@@ -133,4 +127,41 @@ test_that('Automatic symmetry detection works', {
 
   # Should throw an error if non-symmetric matix provided when symmetry = TRUE
   expect_error(WoodburyMatrix(M_gg, M_gg, symmetry = TRUE))
+})
+
+test_that('Multiple B matrices can be provided', {
+  W1 <- WoodburyMatrix(G_100, list(G_100, 2 * G_100))
+  expect_is(W1, 'GWoodburyMatrix')
+  expect_Matrix_equal(W1@B, bdiag(G_100, 2 * G_100))
+  expect_Matrix_equal(W1@U, cbind(Diagonal(100), Diagonal(100)))
+  expect_Matrix_equal(W1@V, rbind(Diagonal(100), Diagonal(100)))
+
+  W2 <- WoodburyMatrix(S_100_pd, list(S_100_pd, 2 * S_100_pd))
+  expect_is(W2, 'SWoodburyMatrix')
+  expect_Matrix_equal(W2@B, bdiag(S_100_pd, 2 * S_100_pd))
+  expect_Matrix_equal(W2@X, cbind(Diagonal(100), Diagonal(100)))
+})
+
+test_that('Multiple U matrices can be provided', {
+  W <- WoodburyMatrix(G_100, G_100, U = list(Diagonal(100), 2 * Diagonal(100)))
+  expect_Matrix_equal(W@U, cbind(Diagonal(100), 2 * Diagonal(100)))
+})
+
+test_that('Argument recycling', {
+  # Recycling of B works
+  W1 <- WoodburyMatrix(G_100, G_100, U = list(Diagonal(100), 2 * Diagonal(100)))
+  expect_Matrix_equal(W1@B, bdiag(G_100, G_100))
+
+  # Recycling of U works
+  WW <- WoodburyMatrix(G_100, list(G_100, G_100), U = 2 * Diagonal(100))
+  expect_Matrix_equal(WW@U, cbind(2 * Diagonal(100), 2 * Diagonal(100)))
+})
+
+test_that('O is dense if appropriate', {
+  D <- Diagonal(100)
+  D_dense <- as(as(D, 'dgeMatrix'), 'dsyMatrix')
+  expect_is(WoodburyMatrix(D, D)@O, 'sparseMatrix')
+  expect_is(WoodburyMatrix(D_dense, D)@O, 'denseMatrix')
+  expect_is(WoodburyMatrix(D, D_dense)@O, 'denseMatrix')
+  expect_is(WoodburyMatrix(D_dense, D_dense)@O, 'denseMatrix')
 })

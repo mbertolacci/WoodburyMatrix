@@ -21,17 +21,14 @@
 #' @slot X n x p subclass of \code{\linkS4class{Matrix}} (only for
 # \code{SWoodburyMatrix})
 #' @slot O p x p subclass of \code{\linkS4class{Matrix}}
+#' @param x \code{WoodburyMatrix} object
+#' @param y Matrix or vector
 #' @seealso \link{WoodburyMatrix} for object construction, \linkS4class{Matrix}
 #' (the parent of this class).
 #' @export
 setClass(
   'WoodburyMatrix',
-  contains = 'Matrix',
-  slots = list(
-    A = 'Matrix',
-    B = 'Matrix',
-    O = 'Matrix'
-  )
+  contains = 'Matrix'
 )
 
 #' @describeIn WoodburyMatrix-class Sub-class representing a generic matrix.
@@ -40,10 +37,15 @@ setClass(
   'GWoodburyMatrix',
   contains = 'WoodburyMatrix',
   slots = list(
+    A = 'Matrix',
+    B = 'Matrix',
     U = 'Matrix',
-    V = 'Matrix'
+    V = 'Matrix',
+    O = 'Matrix'
   )
 )
+
+setClassUnion('symMatrix', c('diagonalMatrix', 'symmetricMatrix'))
 
 #' @describeIn WoodburyMatrix-class Sub-class representing a symmetric matrix.
 #' @export
@@ -51,9 +53,9 @@ setClass(
   'SWoodburyMatrix',
   contains = 'WoodburyMatrix',
   slots = list(
-    A = 'symmetricMatrix',
-    B = 'symmetricMatrix',
+    A = 'symMatrix',
+    B = 'symMatrix',
     X = 'Matrix',
-    O = 'symmetricMatrix'
+    O = 'symMatrix'
   )
 )

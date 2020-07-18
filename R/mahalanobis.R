@@ -2,14 +2,14 @@
 #'
 #' Generic for computing the squared Mahalanobis distance.
 #'
-#' @param x Numeric vector
+#' @param x Numeric vector or matrix
 #' @param center Numeric vector representing the mean; if omitted, defaults to
 #' zero mean
 #' @param cov Covariance matrix
 #' @param inverted Whether to treat \code{cov} as a precision matrix; must be
 #' \code{FALSE} for \code{SWoodburyMatrix} objects.
 #' @param ... Passed to the \code{\link[Matrix]{Cholesky}} function.
-#' @seealso base::mahalanobis
+#' @seealso \link[base]{mahalanobis}
 #' @export
 setGeneric('mahalanobis')
 
@@ -19,24 +19,19 @@ setGeneric('mahalanobis')
 setMethod(
   'mahalanobis',
   signature(x = 'ANY', center = 'ANY', cov = 'SWoodburyMatrix'),
-  function(x, center, cov, inverted = FALSE, ...) {
+  function(x, center, cov, inverted = FALSE, method = 1, ...) {
     stopifnot(!inverted)
 
-    if (!missing(center)) {
-      x <- x - center
-    }
-
-    chol_O <- .try_Cholesky(cov@O, LDL = FALSE, ...)
-    if (!is.null(chol_O)) {
-      A_x <- cov@A %*% x
-      as.numeric(crossprod(
-        x,
-        A_x
-      ) - crossprod(.chol_Linv_P(
-        chol_O,
-        crossprod(cov@X, A_x)
-      )))
+    if (is.matrix(x)) {
+      if (!missing(center)) {
+        x <- sweep(x, 1, center)
+      }
+      t_x <- t(x)
+      colSums(t_x * solve(cov, t_x))
     } else {
+      if (!missing(center)) {
+        x <- x - center
+      }
       as.numeric(crossprod(x, solve(cov, x)))
     }
   }

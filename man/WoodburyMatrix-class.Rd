@@ -19,6 +19,11 @@
 
 \S4method{t}{SWoodburyMatrix}(x)
 }
+\arguments{
+\item{x}{\code{WoodburyMatrix} object}
+
+\item{y}{Matrix or vector}
+}
 \description{
 The \code{WoodburyMatrix} is a virtual class, contained by both
 \code{GWoodburyMatrix} (for general matrices) and \code{SWoodburyMatrix}
