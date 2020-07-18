@@ -18,4 +18,5 @@ Imports:
     Matrix,
     methods
 Suggests:
+    covr,
     testthat
