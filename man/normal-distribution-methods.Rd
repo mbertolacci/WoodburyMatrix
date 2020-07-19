@@ -2,13 +2,13 @@
 % Please edit documentation in R/normal-distribution.R
 \name{normal-distribution-methods}
 \alias{normal-distribution-methods}
-\alias{dWnorm}
-\alias{rWnorm}
+\alias{dwnorm}
+\alias{rwnorm}
 \title{Normal distribution methods for \code{SWoodburyMatrix} objects}
 \usage{
-dWnorm(x, mean, covariance, log = FALSE)
+dwnorm(x, mean, covariance, log = FALSE)
 
-rWnorm(n, mean, covariance)
+rwnorm(n, mean, covariance)
 }
 \arguments{
 \item{x}{A numeric vector or matrix.}
@@ -28,10 +28,10 @@ distribution with an \code{SWoodburyMatrix} object as its covariance matrix.
 }
 \section{Functions}{
 \itemize{
-\item \code{dWnorm}: Compute the density of the
+\item \code{dwnorm}: Compute the density of the
 distribution
 
-\item \code{rWnorm}: Draw samples from the distribution
+\item \code{rwnorm}: Draw samples from the distribution
 }}
 
 \seealso{

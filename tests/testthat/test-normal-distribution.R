@@ -1,6 +1,6 @@
 context('normal distribution')
 
-test_that('dWnorm returns the correct value for known examples', {
+test_that('dwnorm returns the correct value for known examples', {
   n <- 100
   W <- WoodburyMatrix(Diagonal(n), Diagonal(n))
 
@@ -8,26 +8,26 @@ test_that('dWnorm returns the correct value for known examples', {
   true_with_1 <- true_with_0 - 0.5 * n / 2
 
   expect_equal(
-    dWnorm(rep(1, n), covariance = W, log = TRUE),
+    dwnorm(rep(1, n), covariance = W, log = TRUE),
     true_with_1
   )
   expect_equal(
-    dWnorm(rep(1, n), covariance = W, log = FALSE),
+    dwnorm(rep(1, n), covariance = W, log = FALSE),
     exp(true_with_1)
   )
   expect_equal(
-    dWnorm(rbind(rep(0, n), rep(1, n)), covariance = W, log = TRUE),
+    dwnorm(rbind(rep(0, n), rep(1, n)), covariance = W, log = TRUE),
     c(true_with_0, true_with_1)
   )
 })
 
-test_that('rWnorm return value has correct dimensions', {
+test_that('rwnorm return value has correct dimensions', {
   n <- 100
 
   check_shapes <- function(W) {
-    expect_length(rWnorm(1, covariance = W), n)
-    expect_length(rWnorm(1, 1, W), n)
-    expect_equal(dim(rWnorm(2, 1, W)), c(2, n))
+    expect_length(rwnorm(1, covariance = W), n)
+    expect_length(rwnorm(1, 1, W), n)
+    expect_equal(dim(rwnorm(2, 1, W)), c(2, n))
   }
 
   D <- Diagonal(n)

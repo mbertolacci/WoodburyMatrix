@@ -1,4 +1,4 @@
-#' Calculate the determinant of a matrix
+#' Calculate the determinant of a WoodburyMatrix object
 #'
 #' Calculates the (log) determinant of a \code{\linkS4class{WoodburyMatrix}}
 #' using the matrix determinant lemma.

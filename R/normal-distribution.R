@@ -16,7 +16,7 @@ NULL
 #' @describeIn normal-distribution-methods Compute the density of the
 #' distribution
 #' @export
-dWnorm <- function(x, mean, covariance, log = FALSE) {
+dwnorm <- function(x, mean, covariance, log = FALSE) {
   if (missing(mean)) mean <- 0
 
   n <- if (is.matrix(x)) ncol(x) else length(x)
@@ -31,7 +31,7 @@ dWnorm <- function(x, mean, covariance, log = FALSE) {
 
 #' @describeIn normal-distribution-methods Draw samples from the distribution
 #' @export
-rWnorm <- function(n, mean, covariance) {
+rwnorm <- function(n, mean, covariance) {
   if (missing(mean)) mean <- 0
 
   output <- sweep(

@@ -13,7 +13,7 @@
 
 \S4method{solve}{GWoodburyMatrix,ANY}(a, b)
 
-\S4method{solve}{SWoodburyMatrix,missing}(a, b, ...)
+\S4method{solve}{SWoodburyMatrix,missing}(a)
 
 \S4method{solve}{SWoodburyMatrix,ANY}(a, b)
 }
@@ -23,8 +23,6 @@
 \item{b}{Matrix, vector, or similar (needs to be compatible with the
 submatrices \code{a@A} and \code{a@V} or \code{a@X} that define the
 \code{WoodburyMatrix}).}
-
-\item{...}{Passed to the \code{\link[Matrix]{Cholesky}} function.}
 }
 \value{
 The solution to the linear system, or the inverse of the matrix. The

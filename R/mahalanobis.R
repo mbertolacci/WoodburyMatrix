@@ -1,4 +1,4 @@
-#' Mahalanobis Distance
+#' Mahalanobis distance
 #'
 #' Generic for computing the squared Mahalanobis distance.
 #'

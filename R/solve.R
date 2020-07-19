@@ -43,13 +43,12 @@ setMethod(
   }
 )
 
-#' @param ... Passed to the \code{\link[Matrix]{Cholesky}} function.
 #' @describeIn solve-methods Invert the symmetric matrix
 #' @export
 setMethod(
   'solve',
   signature(a = 'SWoodburyMatrix', b = 'missing'),
-  function(a, ...) {
+  function(a) {
     Xt_A <- crossprod(a@X, a@A)
     a@A - forceSymmetric(crossprod(Xt_A, solve(a@O, Xt_A)))
   }

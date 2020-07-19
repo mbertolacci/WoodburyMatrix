@@ -2,7 +2,7 @@
 % Please edit documentation in R/determinant.R
 \name{determinant,WoodburyMatrix,logical-method}
 \alias{determinant,WoodburyMatrix,logical-method}
-\title{Calculate the determinant of a matrix}
+\title{Calculate the determinant of a WoodburyMatrix object}
 \usage{
 \S4method{determinant}{WoodburyMatrix,logical}(x, logarithm)
 }

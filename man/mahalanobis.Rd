@@ -3,7 +3,7 @@
 \name{mahalanobis}
 \alias{mahalanobis}
 \alias{mahalanobis,ANY,ANY,SWoodburyMatrix-method}
-\title{Mahalanobis Distance}
+\title{Mahalanobis distance}
 \usage{
 mahalanobis(x, center, cov, inverted = FALSE, ...)
 
