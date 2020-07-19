@@ -1,3 +1,3 @@
-#' @import methods
 #' @import Matrix
+#' @import methods
 NULL

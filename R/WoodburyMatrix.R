@@ -91,9 +91,12 @@ WoodburyMatrix <- function(
   }
 
   # Convert everything to lists
-  U_parts <- if (missing(U)) list(Diagonal(nrow(A))) else if (!is.list(U)) list(U) else U
-  V_parts <- if (missing(V)) list(Diagonal(nrow(A))) else if (!is.list(V)) list(V) else V
-  X_parts <- if (missing(X)) list(Diagonal(nrow(A))) else if (!is.list(X)) list(X) else X
+  to_list <- function(x, is_missing) {
+    if (is_missing) list(Diagonal(nrow(A))) else if (!is.list(x)) list(x) else x
+  }
+  U_parts <- to_list(U, missing(U))
+  V_parts <- to_list(V, missing(V))
+  X_parts <- to_list(X, missing(X))
 
   # Convert to appropriate Matrix subtypes (done before recycling to avoid
   # unnecessarily repeating conversions)
