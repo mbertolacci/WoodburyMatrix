@@ -97,7 +97,7 @@
   W^{-1} = A - AUO^{-1}VA,
 \]</span> where <span class="math inline">\(O = B + VAU\)</span> (a <span class="math inline">\(p \times p\)</span> matrix), and <span class="math display">\[
   |W| = |O||A|^{-1}|B|^{-1}.
-\]</span> These two relationships are often called the Woodbury matrix identity and the matrix determinant lemma, respectively. When <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are both very sparse, or <span class="math inline">\(A\)</span> is sparse (or even diagonal) and <span class="math inline">\(p\)</span> is much smaller than <span class="math inline">\(n\)</span>, manipulating the matrices via these relationships rather than forming <span class="math inline">\(W\)</span> directly can lead to massive computational savings. A symmetric special case is given by <span class="math display">\[
+\]</span> These two relationships are often called the <a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury matrix identity</a> and the <a href="https://en.wikipedia.org/wiki/Matrix_determinant_lemma">matrix determinant lemma</a>, respectively. When <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are both very sparse, or <span class="math inline">\(A\)</span> is sparse (or even diagonal) and <span class="math inline">\(p\)</span> is much smaller than <span class="math inline">\(n\)</span>, manipulating the matrices via these relationships rather than forming <span class="math inline">\(W\)</span> directly can lead to massive computational savings. A symmetric special case is given by <span class="math display">\[
   W = A^{-1} + XB^{-1}X',
 \]</span> where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> must now be symmetric, and <span class="math inline">\(X\)</span> is an <span class="math inline">\(n \times p\)</span> matrix.</p>
 <p>This package provides a class, <code>WoodburyMatrix</code>, to help in using these identities. <code>WoodburyMatrix</code> is a subclass the <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html">Matrix::Matrix</a></code> class, and has two subtypes, <code>GWoodburyMatrix</code> for general matrices, and <code>SWoodburyMatrix</code> for symmetric matrices. A <code>WoodburyMatrix</code> can be formed by providing the matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (with <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> defaulting to identity matrices) to the <code><a href="../reference/WoodburyMatrix.html">WoodburyMatrix(...)</a></code> function:</p>
@@ -176,9 +176,9 @@
 <p>The <code>WoodburyMatrix</code> object is much smaller. You can draw samples from this distribution using the function <code>rwnorm</code>, and calculate its log density using <code>dwnorm</code>:</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">Y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/normal-distribution-methods.html">rwnorm</a></span>(<span class="fl">1</span>, <span class="no">X</span> <span class="kw">%*%</span> <span class="no">mu_beta</span>, <span class="no">Sigma_Y</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/normal-distribution-methods.html">dwnorm</a></span>(<span class="no">Y</span>, <span class="no">X</span> <span class="kw">%*%</span> <span class="no">mu_beta</span>, <span class="no">Sigma_Y</span>, <span class="kw">log</span> <span class="kw">=</span> <span class="fl">TRUE</span>)))
-<span class="co">#&gt; [1] -2860.762</span>
+<span class="co">#&gt; [1] -2939.81</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;    0.01    0.00    0.01</span></pre></body></html></div>
+<span class="co">#&gt;   0.020   0.001   0.036</span></pre></body></html></div>
 <p>Compare the time this takes to the direct version:</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">Y_m</span> <span class="kw">&lt;-</span> <span class="no">Y</span> - <span class="no">X</span> <span class="kw">%*%</span> <span class="no">mu_beta</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(
@@ -186,9 +186,9 @@
   - <span class="fl">0.5</span> * <span class="fu"><a href="https://rdrr.io/r/base/det.html">determinant</a></span>(<span class="no">Sigma_Y_direct</span>)$<span class="no">modulus</span>
   - <span class="fl">0.5</span> * <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html">crossprod</a></span>(<span class="no">Y_m</span>, <span class="fu"><a href="../reference/solve-methods.html">solve</a></span>(<span class="no">Sigma_Y_direct</span>, <span class="no">Y_m</span>))
 )))
-<span class="co">#&gt; [1] -2860.762</span>
+<span class="co">#&gt; [1] -2939.81</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.897   0.115   0.590</span></pre></body></html></div>
+<span class="co">#&gt;   0.996   0.121   0.980</span></pre></body></html></div>
 <p>For large <span class="math inline">\(n\)</span> the direct version would be completely infeasible.</p>
 </div>
 <div id="example-2-sums-of-sparse-precision-matrices" class="section level2">
@@ -238,9 +238,9 @@
 <p><img src="WoodburyMatrix_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <p>And finally we can calculate the log density of the sample very efficiently:</p>
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/normal-distribution-methods.html">dwnorm</a></span>(<span class="no">Y</span>, <span class="kw">covariance</span> <span class="kw">=</span> <span class="no">Sigma_Y</span>, <span class="kw">log</span> <span class="kw">=</span> <span class="fl">TRUE</span>)))
-<span class="co">#&gt; [1] -18908.63</span>
+<span class="co">#&gt; [1] -18805.3</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.021   0.000   0.022</span></pre></body></html></div>
+<span class="co">#&gt;   0.052   0.001   0.072</span></pre></body></html></div>
 </div>
 <div id="multiple-b-matrices" class="section level2">
 <h2 class="hasAnchor">
@@ -260,7 +260,7 @@
 <span class="no">b</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="no">n</span>)
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="fu"><a href="../reference/solve-methods.html">solve</a></span>(<span class="no">W</span>, <span class="no">b</span>))
 <span class="co">#&gt; Formal class 'dgeMatrix' [package "Matrix"] with 4 slots</span>
-<span class="co">#&gt;   ..@ x       : num [1:500] 449 -154 -367 -1285 945 ...</span>
+<span class="co">#&gt;   ..@ x       : num [1:500] 177.4 -254.2 -303.5 -279.1 51.1 ...</span>
 <span class="co">#&gt;   ..@ Dim     : int [1:2] 500 1</span>
 <span class="co">#&gt;   ..@ Dimnames:List of 2</span>
 <span class="co">#&gt;   .. ..$ : NULL</span>
@@ -271,6 +271,12 @@
 <h2 class="hasAnchor">
 <a href="#implementation-notes" class="anchor"></a>Implementation notes</h2>
 <p>For both general and symmetric matrices, heavy implicit use is made of the fact that the Matrix package caches matrix factorisations. This means that, generally speaking, the heavy lifting of decomposing the matrices is done on the first operation like <code>solve</code> or <code>determinant</code>, and subsequent calls are much faster.</p>
+</div>
+<div id="bibliography" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bibliography" class="anchor"></a>Bibliography</h2>
+<p>Max A. Woodbury, Inverting modified matrices, Memorandum Rept. 42, Statistical Research Group, Princeton University, Princeton, NJ, 1950, 4pp</p>
+<p>See also the Wikipedia pages for the <a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury matrix identity</a> and the <a href="https://en.wikipedia.org/wiki/Matrix_determinant_lemma">Matrix determinant lemma</a>.</p>
 </div>
   </div>
 

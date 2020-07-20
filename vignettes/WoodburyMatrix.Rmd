@@ -34,7 +34,7 @@ where $O = B + VAU$ (a $p \times p$ matrix), and
 $$
   |W| = |O||A|^{-1}|B|^{-1}.
 $$
-These two relationships are often called the Woodbury matrix identity and the matrix determinant lemma, respectively. When $A$ and $B$ are both very sparse, or $A$ is sparse (or even diagonal) and $p$ is much smaller than $n$, manipulating the matrices via these relationships rather than forming $W$ directly can lead to massive computational savings. A symmetric special case is given by
+These two relationships are often called the [Woodbury matrix identity](https://en.wikipedia.org/wiki/Woodbury_matrix_identity) and the [matrix determinant lemma](https://en.wikipedia.org/wiki/Matrix_determinant_lemma), respectively. When $A$ and $B$ are both very sparse, or $A$ is sparse (or even diagonal) and $p$ is much smaller than $n$, manipulating the matrices via these relationships rather than forming $W$ directly can lead to massive computational savings. A symmetric special case is given by
 $$
   W = A^{-1} + XB^{-1}X',
 $$
@@ -238,3 +238,9 @@ str(solve(W, b))
 ## Implementation notes
 
 For both general and symmetric matrices, heavy implicit use is made of the fact that the Matrix package caches matrix factorisations. This means that, generally speaking, the heavy lifting of decomposing the matrices is done on the first operation like `solve` or `determinant`, and subsequent calls are much faster.
+
+## Bibliography
+
+Max A. Woodbury, Inverting modified matrices, Memorandum Rept. 42, Statistical Research Group, Princeton University, Princeton, NJ, 1950, 4pp
+
+See also the Wikipedia pages for the [Woodbury matrix identity](https://en.wikipedia.org/wiki/Woodbury_matrix_identity) and the [Matrix determinant lemma](https://en.wikipedia.org/wiki/Matrix_determinant_lemma).
