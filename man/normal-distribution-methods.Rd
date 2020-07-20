@@ -35,6 +35,7 @@ distribution
 }}
 
 \examples{
+library(Matrix)
 # Trivial example with diagonal covariance matrices
 W <- WoodburyMatrix(Diagonal(10), Diagonal(10))
 x <- rwnorm(10, covariance = W)
