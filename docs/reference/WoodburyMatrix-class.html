@@ -90,6 +90,9 @@ ncol, dim and so on also work." />
   </a>
 </li>
 <li>
+  <a href="../articles/WoodburyMatrix.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li>
@@ -118,7 +121,7 @@ ncol, dim and so on also work." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Virtual class for Woodbury identity matrices</h1>
-    <small class="dont-index">Source: <a href='http://github.com/mbertolacci/WoodburyMatrix/blob/master/R/class-WoodburyMatrix.R'><code>R/class-WoodburyMatrix.R</code></a>, <a href='http://github.com/mbertolacci/WoodburyMatrix/blob/master/R/matrix-ops.R'><code>R/matrix-ops.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/mbertolacci/WoodburyMatrix/blob/master/R/class-WoodburyMatrix.R'><code>R/class-WoodburyMatrix.R</code></a>, <a href='http://github.com/mbertolacci/WoodburyMatrix/blob/master/R/is-symmetric.R'><code>R/is-symmetric.R</code></a>, <a href='http://github.com/mbertolacci/WoodburyMatrix/blob/master/R/matrix-ops.R'><code>R/matrix-ops.R</code></a></small>
     <div class="hidden name"><code>WoodburyMatrix-class.Rd</code></div>
     </div>
 
@@ -134,7 +137,13 @@ below; see also the <a href='solve-methods.html'>solve</a> methods. This class i
     
     </div>
 
-    <pre class="usage"># S4 method for GWoodburyMatrix,ANY
+    <pre class="usage"># S4 method for GWoodburyMatrix
+isSymmetric(object)
+
+# S4 method for SWoodburyMatrix
+isSymmetric(object)
+
+# S4 method for GWoodburyMatrix,ANY
 %*%(x, y)
 
 # S4 method for SWoodburyMatrix,ANY
@@ -149,6 +158,10 @@ t(x)</pre>
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>object</th>
+      <td><p><code>WoodburyMatrix</code> object</p></td>
+    </tr>
     <tr>
       <th>x</th>
       <td><p><code>WoodburyMatrix</code> object</p></td>
@@ -165,6 +178,10 @@ t(x)</pre>
 <ul>
 <li><p><code>GWoodburyMatrix-class</code>: Sub-class representing a generic matrix.</p></li>
 <li><p><code>SWoodburyMatrix-class</code>: Sub-class representing a symmetric matrix.</p></li>
+<li><p><code>isSymmetric,GWoodburyMatrix-method</code>: Check for symmetry of matrix; always returns
+<code>FALSE</code>.</p></li>
+<li><p><code>isSymmetric,SWoodburyMatrix-method</code>: Check for symmetry of matrix; always returns
+<code>TRUE</code>.</p></li>
 <li><p><code>%*%,GWoodburyMatrix,ANY-method</code>: Matrix multiplication (generally fast and</p></li>
 <li><p><code>%*%,SWoodburyMatrix,ANY-method</code>: Matrix multiplication (generally fast and</p></li>
 <li><p><code>t,GWoodburyMatrix-method</code>: Return the transpose of the matrix as

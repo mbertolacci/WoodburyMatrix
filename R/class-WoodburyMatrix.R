@@ -22,6 +22,7 @@
 # \code{SWoodburyMatrix})
 #' @slot O p x p subclass of \code{\linkS4class{Matrix}}
 #' @param x \code{WoodburyMatrix} object
+#' @param object \code{WoodburyMatrix} object
 #' @param y Matrix or vector
 #' @seealso \link{WoodburyMatrix} for object construction, \linkS4class{Matrix}
 #' (the parent of this class).
