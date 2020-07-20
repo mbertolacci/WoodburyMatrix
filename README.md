@@ -8,7 +8,7 @@ WoodburyMatrix is an R package that provides a hierarchy of classes and methods 
 
 ## Installation
 
-The package is currently available only on GitHub, and can be installed with:
+The package is currently available only on GitHub, and can be installed with
 
 ```{r}
 devtools::install_github('mbertolacci/WoodburyMatrix')
