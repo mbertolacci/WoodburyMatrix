@@ -43,6 +43,7 @@ compare_to_direct <- function(
       mahalanobis(b, center = 1, cov = W_direct)
     )
   }
+  expect_equal(isSymmetric(W), symmetric)
 }
 
 test_that('GWoodbury with diagonal matrices', {
