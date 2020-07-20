@@ -63,6 +63,33 @@
 #' users who have precomputed the matrix for other purposes.
 #' @param symmetric Logical value, whether to create a symmetric or general
 #' matrix. See Details section for more information.
+#' @examples
+#' library(Matrix)
+#' # Example solving a linear system with general matrices
+#' A <- Diagonal(100)
+#' B <- rsparsematrix(100, 100, 0.5)
+#' W <- WoodburyMatrix(A, B)
+#' str(solve(W, rnorm(100)))
+#'
+#' # Calculating the determinant of a symmetric system
+#' A <- Diagonal(100)
+#' B <- rsparsematrix(100, 100, 0.5, symmetric = TRUE)
+#' W <- WoodburyMatrix(A, B, symmetric = TRUE)
+#' print(determinant(W))
+#'
+#' # Having a lower rank B matrix and an X matrix
+#' A <- Diagonal(100)
+#' B <- rsparsematrix(10, 10, 1, symmetric = TRUE)
+#' X <- rsparsematrix(100, 10, 1)
+#' W <- WoodburyMatrix(A, B, X = X)
+#' str(solve(W, rnorm(100)))
+#'
+#' # Multiple B matrices
+#' A <- Diagonal(100)
+#' B1 <- rsparsematrix(100, 100, 1, symmetric = TRUE)
+#' B2 <- rsparsematrix(100, 100, 1, symmetric = TRUE)
+#' W <- WoodburyMatrix(A, B = list(B1, B2))
+#' str(solve(W, rnorm(100)))
 #' @seealso \linkS4class{WoodburyMatrix}, \link{solve}, \link{instantiate}
 #' @export
 WoodburyMatrix <- function(

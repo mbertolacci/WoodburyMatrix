@@ -34,6 +34,12 @@ distribution
 \item \code{rwnorm}: Draw samples from the distribution
 }}
 
+\examples{
+# Trivial example with diagonal covariance matrices
+W <- WoodburyMatrix(Diagonal(10), Diagonal(10))
+x <- rwnorm(10, covariance = W)
+print(dwnorm(x, covariance = W, log = TRUE))
+}
 \seealso{
 \link{WoodburyMatrix}
 }

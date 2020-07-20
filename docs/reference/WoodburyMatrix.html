@@ -237,6 +237,57 @@ matrices but only one U matrix (and vice-versa).</p>
     <div class='dont-index'><p><a href='WoodburyMatrix-class.html'>WoodburyMatrix</a>, <a href='solve-methods.html'>solve</a>, <a href='instantiate.html'>instantiate</a></p></div>
     
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>Matrix</span>)
+<span class='co'># Example solving a linear system with general matrices</span>
+<span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/Diagonal.html'>Diagonal</a></span>(<span class='fl'>100</span>)
+<span class='no'>B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/rsparsematrix.html'>rsparsematrix</a></span>(<span class='fl'>100</span>, <span class='fl'>100</span>, <span class='fl'>0.5</span>)
+<span class='no'>W</span> <span class='kw'>&lt;-</span> <span class='fu'>WoodburyMatrix</span>(<span class='no'>A</span>, <span class='no'>B</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'><a href='solve-methods.html'>solve</a></span>(<span class='no'>W</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)))</div><div class='output co'>#&gt; Formal class 'dgeMatrix' [package "Matrix"] with 4 slots
+#&gt;   ..@ x       : num [1:100] 3.85 3.14 7.77 -5.45 9 ...
+#&gt;   ..@ Dim     : int [1:2] 100 1
+#&gt;   ..@ Dimnames:List of 2
+#&gt;   .. ..$ : NULL
+#&gt;   .. ..$ : NULL
+#&gt;   ..@ factors : list()</div><div class='input'>
+<span class='co'># Calculating the determinant of a symmetric system</span>
+<span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/Diagonal.html'>Diagonal</a></span>(<span class='fl'>100</span>)
+<span class='no'>B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/rsparsematrix.html'>rsparsematrix</a></span>(<span class='fl'>100</span>, <span class='fl'>100</span>, <span class='fl'>0.5</span>, <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>W</span> <span class='kw'>&lt;-</span> <span class='fu'>WoodburyMatrix</span>(<span class='no'>A</span>, <span class='no'>B</span>, <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/print.html'>print</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/det.html'>determinant</a></span>(<span class='no'>W</span>))</div><div class='output co'>#&gt; $modulus
+#&gt; [1] 7.128002
+#&gt; attr(,"logarithm")
+#&gt; [1] TRUE
+#&gt; 
+#&gt; $sign
+#&gt; [1] 1
+#&gt; 
+#&gt; attr(,"class")
+#&gt; [1] "det"</div><div class='input'>
+<span class='co'># Having a lower rank B matrix and an X matrix</span>
+<span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/Diagonal.html'>Diagonal</a></span>(<span class='fl'>100</span>)
+<span class='no'>B</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/rsparsematrix.html'>rsparsematrix</a></span>(<span class='fl'>10</span>, <span class='fl'>10</span>, <span class='fl'>1</span>, <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/rsparsematrix.html'>rsparsematrix</a></span>(<span class='fl'>100</span>, <span class='fl'>10</span>, <span class='fl'>1</span>)
+<span class='no'>W</span> <span class='kw'>&lt;-</span> <span class='fu'>WoodburyMatrix</span>(<span class='no'>A</span>, <span class='no'>B</span>, <span class='kw'>X</span> <span class='kw'>=</span> <span class='no'>X</span>)
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'><a href='solve-methods.html'>solve</a></span>(<span class='no'>W</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)))</div><div class='output co'>#&gt; Formal class 'dgeMatrix' [package "Matrix"] with 4 slots
+#&gt;   ..@ x       : num [1:100] 1.185 -1.868 0.163 0.589 2.636 ...
+#&gt;   ..@ Dim     : int [1:2] 100 1
+#&gt;   ..@ Dimnames:List of 2
+#&gt;   .. ..$ : NULL
+#&gt;   .. ..$ : NULL
+#&gt;   ..@ factors : list()</div><div class='input'>
+<span class='co'># Multiple B matrices</span>
+<span class='no'>A</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/Diagonal.html'>Diagonal</a></span>(<span class='fl'>100</span>)
+<span class='no'>B1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/rsparsematrix.html'>rsparsematrix</a></span>(<span class='fl'>100</span>, <span class='fl'>100</span>, <span class='fl'>1</span>, <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>B2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/pkg/Matrix/man/rsparsematrix.html'>rsparsematrix</a></span>(<span class='fl'>100</span>, <span class='fl'>100</span>, <span class='fl'>1</span>, <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)
+<span class='no'>W</span> <span class='kw'>&lt;-</span> <span class='fu'>WoodburyMatrix</span>(<span class='no'>A</span>, <span class='kw'>B</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>B1</span>, <span class='no'>B2</span>))
+<span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='fu'><a href='solve-methods.html'>solve</a></span>(<span class='no'>W</span>, <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>)))</div><div class='output co'>#&gt; Formal class 'dgeMatrix' [package "Matrix"] with 4 slots
+#&gt;   ..@ x       : num [1:100] -2.92 -3.28 2.63 -3.32 0.69 ...
+#&gt;   ..@ Dim     : int [1:2] 100 1
+#&gt;   ..@ Dimnames:List of 2
+#&gt;   .. ..$ : NULL
+#&gt;   .. ..$ : NULL
+#&gt;   ..@ factors : list()</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

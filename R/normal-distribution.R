@@ -10,6 +10,11 @@
 #' @param log Logical indicating whether to return log of density.
 #' @param n Number of samples to return. If \code{n = 1}, returns a vector,
 #' otherwise returns an \code{n} by \code{nrow(W)} matrix.
+#' @examples
+#' # Trivial example with diagonal covariance matrices
+#' W <- WoodburyMatrix(Diagonal(10), Diagonal(10))
+#' x <- rwnorm(10, covariance = W)
+#' print(dwnorm(x, covariance = W, log = TRUE))
 #' @seealso \link{WoodburyMatrix}
 NULL
 
