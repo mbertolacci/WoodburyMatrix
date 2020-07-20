@@ -241,6 +241,6 @@ For both general and symmetric matrices, heavy implicit use is made of the fact 
 
 ## Bibliography
 
-Max A. Woodbury, Inverting modified matrices, Memorandum Rept. 42, Statistical Research Group, Princeton University, Princeton, NJ, 1950, 4pp
+Max A. Woodbury, *Inverting modified matrices*, Memorandum Rept. 42, Statistical Research Group, Princeton University, Princeton, NJ, 1950, 4pp
 
 See also the Wikipedia pages for the [Woodbury matrix identity](https://en.wikipedia.org/wiki/Woodbury_matrix_identity) and the [Matrix determinant lemma](https://en.wikipedia.org/wiki/Matrix_determinant_lemma).
