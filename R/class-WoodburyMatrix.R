@@ -29,7 +29,7 @@
 #' @export
 setClass(
   'WoodburyMatrix',
-  contains = 'Matrix'
+  contains = c('Matrix', 'VIRTUAL')
 )
 
 #' @describeIn WoodburyMatrix-class Sub-class representing a generic matrix.
@@ -49,10 +49,11 @@ setClass(
 setClassUnion('symMatrix', c('diagonalMatrix', 'symmetricMatrix'))
 
 #' @describeIn WoodburyMatrix-class Sub-class representing a symmetric matrix.
+#' Also subclasses \linkS4class{symmetricMatrix}.
 #' @export
 setClass(
   'SWoodburyMatrix',
-  contains = 'WoodburyMatrix',
+  contains = c('WoodburyMatrix', 'symmetricMatrix'),
   slots = list(
     A = 'symMatrix',
     B = 'symMatrix',

@@ -47,6 +47,7 @@ below; see also the \link{solve} methods. This class is itself a subclass of
 \item \code{GWoodburyMatrix-class}: Sub-class representing a generic matrix.
 
 \item \code{SWoodburyMatrix-class}: Sub-class representing a symmetric matrix.
+Also subclasses \linkS4class{symmetricMatrix}.
 
 \item \code{isSymmetric,GWoodburyMatrix-method}: Check for symmetry of matrix; always returns
 \code{FALSE}.

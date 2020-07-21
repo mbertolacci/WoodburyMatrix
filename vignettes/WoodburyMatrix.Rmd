@@ -46,6 +46,8 @@ This package provides a class, `WoodburyMatrix`, to help in using these identiti
 library(Matrix)
 library(WoodburyMatrix)
 
+set.seed(20200721)
+
 A1 <- rsparsematrix(500, 500, 0.05)
 B1 <- rsparsematrix(500, 500, 0.05)
 W1 <- WoodburyMatrix(A1, B1)
