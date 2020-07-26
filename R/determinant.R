@@ -6,8 +6,8 @@
 #' @param x A object that is a subclass of \code{WoodburyMatrix}
 #' @param logarithm Logical indicating whether to return the logarithm of the
 #' matrix.
-#' @returns Same as \link[base]{determinant}.
-#' @seealso \link[base]{determinant}
+#' @returns Same as \link[base:det]{base::determinant}.
+#' @seealso \link[base:det]{base::determinant}
 #' @export
 setMethod(
   'determinant',

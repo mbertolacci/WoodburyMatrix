@@ -13,12 +13,12 @@
 matrix.}
 }
 \value{
-Same as \link[base]{determinant}.
+Same as \link[base:det]{base::determinant}.
 }
 \description{
 Calculates the (log) determinant of a \code{\linkS4class{WoodburyMatrix}}
 using the matrix determinant lemma.
 }
 \seealso{
-\link[base]{determinant}
+\link[base:det]{base::determinant}
 }
