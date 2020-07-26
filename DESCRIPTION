@@ -1,5 +1,5 @@
 Package: WoodburyMatrix
-Title: Fast matrix operations via the Woodbury matrix identity
+Title: Fast Matrix Operations via the Woodbury Matrix Identity
 Version: 0.0.1
 Authors@R:
     person(given = "Michael",
