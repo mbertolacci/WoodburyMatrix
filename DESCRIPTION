@@ -8,8 +8,8 @@ Authors@R:
            email = "m.bertolacci@gmail.com",
            comment = c(ORCID = "0000-0003-0317-5941"))
 Description: A hierarchy of classes and methods for manipulating matrices formed implicitly from the sums of the inverses of other matrices, a situation commonly encountered in spatial statistics and related fields. Enables easy use of the Woodbury matrix identity and the matrix determinant lemma to allow computation (e.g., solving linear systems) without having to form the actual matrix. More information on the underlying linear algebra can be found in Harville, D. A. (1997) <doi:10.1007/b98818>.
-URL: http://github.com/mbertolacci/WoodburyMatrix
-BugReports: http://github.com/mbertolacci/WoodburyMatrix/issues
+URL: https://github.com/mbertolacci/WoodburyMatrix
+BugReports: https://github.com/mbertolacci/WoodburyMatrix/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
