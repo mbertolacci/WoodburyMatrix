@@ -55,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/mbertolacci/WoodburyMatrix/">
+  <a href="https://github.com/mbertolacci/WoodburyMatrix/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -76,7 +76,7 @@
       <h1 data-toc-skip>Using the Woodbury matrix identity</h1>
             
       
-      <small class="dont-index">Source: <a href="http://github.com/mbertolacci/WoodburyMatrix/blob/master/vignettes/WoodburyMatrix.Rmd"><code>vignettes/WoodburyMatrix.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mbertolacci/WoodburyMatrix/blob/master/vignettes/WoodburyMatrix.Rmd"><code>vignettes/WoodburyMatrix.Rmd</code></a></small>
       <div class="hidden name"><code>WoodburyMatrix.Rmd</code></div>
 
     </div>
@@ -180,7 +180,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/normal-distribution-methods.html">dwnorm</a></span>(<span class="no">Y</span>, <span class="no">X</span> <span class="kw">%*%</span> <span class="no">mu_beta</span>, <span class="no">Sigma_Y</span>, <span class="kw">log</span> <span class="kw">=</span> <span class="fl">TRUE</span>)))
 <span class="co">#&gt; [1] -2902.92</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.015   0.000   0.016</span></pre></body></html></div>
+<span class="co">#&gt;   0.011   0.000   0.012</span></pre></body></html></div>
 <p>Compare the time this takes to the direct version:</p>
 <div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">Y_m</span> <span class="kw">&lt;-</span> <span class="no">Y</span> - <span class="no">X</span> <span class="kw">%*%</span> <span class="no">mu_beta</span>
 <span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(
@@ -190,7 +190,7 @@
 )))
 <span class="co">#&gt; [1] -2902.92</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.888   0.112   0.601</span></pre></body></html></div>
+<span class="co">#&gt;   0.892   0.118   0.585</span></pre></body></html></div>
 <p>For large <span class="math inline">\(n\)</span> the direct version would be completely infeasible.</p>
 </div>
 <div id="example-2-sums-of-sparse-precision-matrices" class="section level2">
@@ -242,7 +242,7 @@
 <div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/normal-distribution-methods.html">dwnorm</a></span>(<span class="no">Y</span>, <span class="kw">covariance</span> <span class="kw">=</span> <span class="no">Sigma_Y</span>, <span class="kw">log</span> <span class="kw">=</span> <span class="fl">TRUE</span>)))
 <span class="co">#&gt; [1] -18822.09</span>
 <span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.025   0.001   0.026</span></pre></body></html></div>
+<span class="co">#&gt;   0.028   0.000   0.031</span></pre></body></html></div>
 </div>
 <div id="multiple-b-matrices" class="section level2">
 <h2 class="hasAnchor">
