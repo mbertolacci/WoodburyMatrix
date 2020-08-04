@@ -8,10 +8,12 @@
 
 <title>Solve methods for <code>WoodburyMatrix</code> objects — solve-methods • WoodburyMatrix</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,8 +38,8 @@
 
 
 
-<meta property="og:title" content="Solve methods for <code>WoodburyMatrix</code> objects — solve-methods" />
 
+<meta property="og:title" content="Solve methods for <code>WoodburyMatrix</code> objects — solve-methods" />
 <meta property="og:description" content="Methods based on solve to solve a linear system of equations
 involving WoodburyMatrix objects. These methods take
 advantage of the Woodbury matrix identity and therefore can be much more
@@ -45,7 +47,6 @@ time and memory efficient than forming the matrix directly.
 Calling this function while omitting the b argument returns the
 inverse of a. This is NOT recommended, since it removes any benefit
 from using an implicit representation of a." />
-
 
 
 
@@ -99,7 +100,6 @@ from using an implicit representation of a." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://github.com/mbertolacci/WoodburyMatrix/">
@@ -126,7 +126,6 @@ from using an implicit representation of a." />
     </div>
 
     <div class="ref-description">
-    
     <p>Methods based on <code>solve</code> to solve a linear system of equations
 involving <code><a href='WoodburyMatrix-class.html'>WoodburyMatrix</a></code> objects. These methods take
 advantage of the Woodbury matrix identity and therefore can be much more
@@ -134,7 +133,6 @@ time and memory efficient than forming the matrix directly.</p>
 <p>Calling this function while omitting the <code>b</code> argument returns the
 inverse of <code>a</code>. This is NOT recommended, since it removes any benefit
 from using an implicit representation of <code>a</code>.</p>
-    
     </div>
 
     <pre class="usage"><span class='co'># S4 method for GWoodburyMatrix,missing</span>
@@ -148,7 +146,7 @@ from using an implicit representation of <code>a</code>.</p>
 
 <span class='co'># S4 method for SWoodburyMatrix,ANY</span>
 <span class='fu'>solve</span>(<span class='no'>a</span>, <span class='no'>b</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -163,14 +161,13 @@ submatrices <code>a@A</code> and <code>a@V</code> or <code>a@X</code> that defin
 <code>WoodburyMatrix</code>).</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>The solution to the linear system, or the inverse of the matrix. The
 class of the return value will be a subclass of
 <code>Matrix</code>, with the specific subclass determined
 by <code>a</code> and <code>b</code>.</p>
-    
     <h2 class="hasAnchor" id="functions"><a class="anchor" href="#functions"></a>Functions</h2>
 
     
@@ -180,11 +177,9 @@ by <code>a</code> and <code>b</code>.</p>
 <li><p><code>solve,SWoodburyMatrix,missing-method</code>: Invert the symmetric matrix</p></li>
 <li><p><code>solve,SWoodburyMatrix,ANY-method</code>: Solve the linear system</p></li>
 </ul>
-    
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='WoodburyMatrix.html'>WoodburyMatrix</a>, <a href='WoodburyMatrix-class.html'>WoodburyMatrix</a></p></div>
-    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

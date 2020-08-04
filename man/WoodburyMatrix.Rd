@@ -113,6 +113,9 @@ B2 <- rsparsematrix(100, 100, 1, symmetric = TRUE)
 W <- WoodburyMatrix(A, B = list(B1, B2))
 str(solve(W, rnorm(100)))
 }
+\references{
+More information on the underlying linear algebra can be found in Harville, D. A. (1997, ISBN:978-0-387-22677-4).
+}
 \seealso{
 \linkS4class{WoodburyMatrix}, \link{solve}, \link{instantiate}
 }

@@ -8,10 +8,12 @@
 
 <title>Create a Woodbury matrix identity matrix — WoodburyMatrix • WoodburyMatrix</title>
 
+
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.4.0/cosmo/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous" />
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
 
@@ -36,8 +38,8 @@
 
 
 
-<meta property="og:title" content="Create a Woodbury matrix identity matrix — WoodburyMatrix" />
 
+<meta property="og:title" content="Create a Woodbury matrix identity matrix — WoodburyMatrix" />
 <meta property="og:description" content="Creates an implicitly defined matrix representing the equation
 $$A^{-1} + U B^{-1} V,$$
 where \(A, U, B\) and \(V\) are n x n, n x p, p x p and p x n matrices,
@@ -47,7 +49,6 @@ where \(X\) is n x p and \(A\) and \(B\) are additionally symmetric.
 The available methods are described in WoodburyMatrix-class
 and in solve. Multiple B / U / V / X matrices are also supported; see
 below" />
-
 
 
 
@@ -101,7 +102,6 @@ below" />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="http://github.com/mbertolacci/WoodburyMatrix/">
@@ -128,7 +128,6 @@ below" />
     </div>
 
     <div class="ref-description">
-    
     <p>Creates an implicitly defined matrix representing the equation
 $$A^{-1} + U B^{-1} V,$$
 where \(A, U, B\) and \(V\) are n x n, n x p, p x p and p x n matrices,
@@ -138,11 +137,10 @@ where \(X\) is n x p and \(A\) and \(B\) are additionally symmetric.
 The available methods are described in <a href='WoodburyMatrix-class.html'>WoodburyMatrix-class</a>
 and in <a href='solve-methods.html'>solve</a>. Multiple B / U / V / X matrices are also supported; see
 below</p>
-    
     </div>
 
     <pre class="usage"><span class='fu'>WoodburyMatrix</span>(<span class='no'>A</span>, <span class='no'>B</span>, <span class='no'>U</span>, <span class='no'>V</span>, <span class='no'>X</span>, <span class='no'>O</span>, <span class='no'>symmetric</span>)</pre>
-    
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -181,12 +179,11 @@ users who have precomputed the matrix for other purposes.</p></td>
 matrix. See Details section for more information.</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A <code><a href='WoodburyMatrix-class.html'>GWoodburyMatrix</a></code> object for a non-symmetric
 matrix, <code><a href='WoodburyMatrix-class.html'>SWoodburyMatrix</a></code> for a symmetric matrix.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The benefit of using an implicit representation is that the inverse
@@ -200,7 +197,6 @@ otherwise easy to deal with, and/or when \(p &lt; n\), manipulating the
 matrices via these relationships rather than forming \(W\) directly can
 have huge advantageous because it avoids having to create the (typically
 dense) matrix $$A^{-1} + U B^{-1} V$$ directly.</p>
-    
     <h2 class="hasAnchor" id="symmetric-form"><a class="anchor" href="#symmetric-form"></a>Symmetric form</h2>
 
     
@@ -216,7 +212,6 @@ the symmetric form in the following circumstances:</p><ul>
   NOT provided.</p></li>
 </ul>
 
-    
     <h2 class="hasAnchor" id="multiple-b-matrices"><a class="anchor" href="#multiple-b-matrices"></a>Multiple B matrices</h2>
 
     
@@ -231,11 +226,12 @@ by letting <code>B = bdiag(...the B matrices...)</code>,
 <p>The <code>B</code>, <code>U</code>, <code>V</code> and <code>X</code> values are recycled to the
 length of the longest list, so you can, for instance, provide multiple B
 matrices but only one U matrix (and vice-versa).</p>
-    
+    <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
+
+    <p>More information on the underlying linear algebra can be found in Harville, D. A. (1997, ISBN:978-0-387-22677-4).</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><a href='WoodburyMatrix-class.html'>WoodburyMatrix</a>, <a href='solve-methods.html'>solve</a>, <a href='instantiate.html'>instantiate</a></p></div>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>Matrix</span>)
