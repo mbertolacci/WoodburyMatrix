@@ -1,6 +1,9 @@
 # WoodburyMatrix
 
-[![Travis build status](https://travis-ci.org/mbertolacci/WoodburyMatrix.svg?branch=master)](https://travis-ci.org/mbertolacci/WoodburyMatrix) [![Coverage status](https://codecov.io/gh/mbertolacci/WoodburyMatrix/branch/master/graph/badge.svg)](https://codecov.io/github/mbertolacci/WoodburyMatrix?branch=master)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/WoodburyMatrix)](https://cran.r-project.org/package=WoodburyMatrix)
+[![Travis build status](https://travis-ci.org/mbertolacci/WoodburyMatrix.svg?branch=master)](https://travis-ci.org/mbertolacci/WoodburyMatrix)
+[![Coverage status](https://codecov.io/gh/mbertolacci/WoodburyMatrix/branch/master/graph/badge.svg)](https://codecov.io/github/mbertolacci/WoodburyMatrix?branch=master)
 
 ## Overview
 
@@ -8,13 +11,17 @@ WoodburyMatrix is an R package that provides a hierarchy of classes and methods 
 
 ## Installation
 
-The package is currently available only on GitHub, and can be installed with
+The package can be installed from [CRAN](https://cran.r-project.org/package=WoodburyMatrix) using
+
+```{r}
+install.packages('WoodburyMatrix')
+```
+
+Alternatively, you can get the latest development version from GitHub with
 
 ```{r}
 devtools::install_github('mbertolacci/WoodburyMatrix')
 ```
-
-Submission to CRAN is anticipated shortly.
 
 ## Using the package
 
