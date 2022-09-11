@@ -189,7 +189,7 @@ WoodburyMatrix <- function(
       if (is(B, 'denseMatrix') || is(rhs, 'denseMatrix')) {
         # HACK(mgnb): Matrix package doesn't coerce to dense matrix in this
         # situation, but it's desirable
-        O <- as(O, 'dsyMatrix')
+        O <- as(as(O, 'symmetricMatrix'), 'unpackedMatrix')
       }
     }
   }

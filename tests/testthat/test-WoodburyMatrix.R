@@ -113,7 +113,7 @@ test_that('Automatic symmetry detection works', {
   expect_is(WoodburyMatrix(M_ss, M_ss), 'SWoodburyMatrix')
 
   # Numerically symmetric
-  M_sg <- as(rsparsematrix(n, n, 0.25, symmetric = TRUE), 'dgCMatrix')
+  M_sg <- as(rsparsematrix(n, n, 0.25, symmetric = TRUE), 'sparseMatrix')
   expect_is(WoodburyMatrix(M_sg, M_sg), 'SWoodburyMatrix')
 
   # Numerically non-symmetric
@@ -160,7 +160,7 @@ test_that('Argument recycling', {
 
 test_that('O is dense if appropriate', {
   D <- Diagonal(100)
-  D_dense <- as(as(D, 'dgeMatrix'), 'dsyMatrix')
+  D_dense <- as(as(D, 'symmetricMatrix'), 'unpackedMatrix')
   expect_is(WoodburyMatrix(D, D)@O, 'sparseMatrix')
   expect_is(WoodburyMatrix(D_dense, D)@O, 'denseMatrix')
   expect_is(WoodburyMatrix(D, D_dense)@O, 'denseMatrix')
