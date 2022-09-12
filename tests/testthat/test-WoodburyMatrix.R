@@ -160,7 +160,7 @@ test_that('Argument recycling', {
 
 test_that('O is dense if appropriate', {
   D <- Diagonal(100)
-  D_dense <- as(as(D, 'symmetricMatrix'), 'unpackedMatrix')
+  D_dense <- as(as(D, 'symmetricMatrix'), 'denseMatrix')
   expect_is(WoodburyMatrix(D, D)@O, 'sparseMatrix')
   expect_is(WoodburyMatrix(D_dense, D)@O, 'denseMatrix')
   expect_is(WoodburyMatrix(D, D_dense)@O, 'denseMatrix')

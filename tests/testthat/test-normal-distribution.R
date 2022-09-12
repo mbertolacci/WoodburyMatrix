@@ -32,6 +32,6 @@ test_that('rwnorm return value has correct dimensions', {
 
   D <- Diagonal(n)
   check_shapes(WoodburyMatrix(D, D))
-  D_dense <- as(as(D, 'symmetricMatrix'), 'unpackedMatrix')
+  D_dense <- as(as(D, 'symmetricMatrix'), 'denseMatrix')
   check_shapes(WoodburyMatrix(D_dense, D_dense))
 })
