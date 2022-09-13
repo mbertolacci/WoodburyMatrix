@@ -1,3 +1,3 @@
-# WoodburyMatrix 0.0.1
+# WoodburyMatrix 0.0.2
 
-This is the first release!
+This is a minor release to remove some calls to code deprecated in the new version of the Matrix package (version 1.5).
