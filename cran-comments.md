@@ -6,7 +6,7 @@
 ## Test environments
 
 * macOS 10.16 with R version 4.2.1
-* Ubuntu 20.04.5 LTS with R version 4.2.1 and development
+* Ubuntu 20.04.5 LTS with R versions 4.1.3, 4.2.1 and development
 * Windows Server x64 (build 20348) with R version 4.2.1
 
 Backwards compatibility with Matrix version 1.4.x has been verified.
