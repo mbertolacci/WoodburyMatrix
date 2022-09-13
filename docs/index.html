@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">WoodburyMatrix</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="articles/WoodburyMatrix.html">Get started</a>
 </li>
@@ -55,8 +51,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mbertolacci/WoodburyMatrix/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/mbertolacci/WoodburyMatrix/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -72,77 +68,91 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="woodburymatrix" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#woodburymatrix" class="anchor"></a>WoodburyMatrix</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="woodburymatrix">WoodburyMatrix<a class="anchor" aria-label="anchor" href="#woodburymatrix"></a>
+</h1></div>
 
-<div id="overview" class="section level2">
-<h2 class="hasAnchor">
-<a href="#overview" class="anchor"></a>Overview</h2>
+<div class="section level2">
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
+</h2>
 <p>WoodburyMatrix is an R package that provides a hierarchy of classes and methods for manipulating matrices formed implicitly from the sums of the inverses of other matrices, a situation commonly encountered in spatial statistics and related fields. It enables easy use of the Woodbury matrix identity and the matrix determinant lemma to allow computation (e.g., solving linear systems) without having to form the actual matrix.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>The package is currently available only on GitHub, and can be installed with</p>
-<pre class="{r}"><code><a href="https://devtools.r-lib.org//reference/remote-reexports.html">devtools::install_github('mbertolacci/WoodburyMatrix')</a></code></pre>
-<p>Submission to CRAN is anticipated shortly.</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>The package can be installed from <a href="https://cran.r-project.org/package=WoodburyMatrix" class="external-link">CRAN</a> using</p>
+<pre class="{r}"><code><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">'WoodburyMatrix'</span><span class="op">)</span></span></code></pre>
+<p>Alternatively, you can get the latest development version from GitHub with</p>
+<pre class="{r}"><code><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">'mbertolacci/WoodburyMatrix'</span><span class="op">)</span></span></code></pre>
 </div>
-<div id="using-the-package" class="section level2">
-<h2 class="hasAnchor">
-<a href="#using-the-package" class="anchor"></a>Using the package</h2>
-<p>An overview of the related mathematics and instructions on using the package are provided on <a href="https://mbertolacci.github.io/WoodburyMatrix/articles/WoodburyMatrix.html">the package website</a>.</p>
+<div class="section level2">
+<h2 id="using-the-package">Using the package<a class="anchor" aria-label="anchor" href="#using-the-package"></a>
+</h2>
+<p>An overview of the related mathematics and instructions on using the package are provided on <a href="https://mbertolacci.github.io/WoodburyMatrix/articles/WoodburyMatrix.html" class="external-link">the package website</a>.</p>
 </div>
-<div id="getting-help" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-help" class="anchor"></a>Getting help</h2>
-<p>If you find a bug or have suggestions for features, please <a href="https://github.com/mbertolacci/WoodburyMatrix/issues">file an issue on GitHub</a>. Otherwise, if you need help, feel free to drop the <a href="mailto:m.bertolacci@gmail.com">author an email</a>.</p>
+<div class="section level2">
+<h2 id="getting-help">Getting help<a class="anchor" aria-label="anchor" href="#getting-help"></a>
+</h2>
+<p>If you find a bug or have suggestions for features, please <a href="https://github.com/mbertolacci/WoodburyMatrix/issues" class="external-link">file an issue on GitHub</a>. Otherwise, if you need help, feel free to drop the <a href="mailto:m.bertolacci@gmail.com">author an email</a>.</p>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="https://github.com/mbertolacci/WoodburyMatrix/">https://​github.com/​mbertolacci/​WoodburyMatrix/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/mbertolacci/WoodburyMatrix/issues">https://​github.com/​mbertolacci/​WoodburyMatrix/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Michael Bertolacci <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-0317-5941" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://cloud.r-project.org/package=WoodburyMatrix" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/mbertolacci/WoodburyMatrix/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/mbertolacci/WoodburyMatrix/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/mbertolacci/WoodburyMatrix"><img src="https://travis-ci.org/mbertolacci/WoodburyMatrix.svg?branch=master" alt="Travis build status"></a></li>
-<li><a href="https://codecov.io/github/mbertolacci/WoodburyMatrix?branch=master"><img src="https://codecov.io/gh/mbertolacci/WoodburyMatrix/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+<li>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
+</li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing WoodburyMatrix</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Michael Bertolacci <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0003-0317-5941" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://cran.r-project.org/package=WoodburyMatrix" class="external-link"><img src="https://www.r-pkg.org/badges/version/WoodburyMatrix" alt="CRAN status"></a></li>
+<li><a href="https://github.com/mbertolacci/WoodburyMatrix/actions" class="external-link"><img src="https://github.com/mbertolacci/WoodburyMatrix/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://codecov.io/github/mbertolacci/WoodburyMatrix?branch=master" class="external-link"><img src="https://codecov.io/gh/mbertolacci/WoodburyMatrix/branch/master/graph/badge.svg" alt="Coverage status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Michael Bertolacci.</p>
+  <p></p>
+<p>Developed by Michael Bertolacci.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -150,6 +160,8 @@
 
   
 
+
+  
 
   </body>
 </html>

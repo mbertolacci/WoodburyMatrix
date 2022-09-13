@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,18 +33,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">WoodburyMatrix</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.0.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/WoodburyMatrix.html">Get started</a>
 </li>
@@ -55,8 +51,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/mbertolacci/WoodburyMatrix/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/mbertolacci/WoodburyMatrix/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -70,79 +66,81 @@
 
       
 
-      </header><script src="WoodburyMatrix_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Using the Woodbury matrix identity</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/mbertolacci/WoodburyMatrix/blob/master/vignettes/WoodburyMatrix.Rmd"><code>vignettes/WoodburyMatrix.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/mbertolacci/WoodburyMatrix/blob/HEAD/vignettes/WoodburyMatrix.Rmd" class="external-link"><code>vignettes/WoodburyMatrix.Rmd</code></a></small>
       <div class="hidden name"><code>WoodburyMatrix.Rmd</code></div>
 
     </div>
 
     
     
-<div id="disclaimer" class="section level2">
-<h2 class="hasAnchor">
-<a href="#disclaimer" class="anchor"></a>Disclaimer</h2>
-<p>This vignette and all its examples assume you are familiar with the <a href="https://cran.r-project.org/package=Matrix">Matrix</a> package. If you are not, perhaps you should be! It provides an organised and optimised set of methods for dealing with both dense and sparse matrices.</p>
+<div class="section level2">
+<h2 id="disclaimer">Disclaimer<a class="anchor" aria-label="anchor" href="#disclaimer"></a>
+</h2>
+<p>This vignette and all its examples assume you are familiar with the <a href="https://cran.r-project.org/package=Matrix" class="external-link">Matrix</a> package. If you are not, perhaps you should be! It provides an organised and optimised set of methods for dealing with both dense and sparse matrices.</p>
 </div>
-<div id="introduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h2>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>Suppose the <span class="math inline">\(n \times n\)</span> matrix <span class="math inline">\(W\)</span> is given by <span class="math display">\[
   W = A^{-1} + UB^{-1}V,
 \]</span> where <span class="math inline">\(A\)</span>, <span class="math inline">\(U\)</span>, <span class="math inline">\(B\)</span> and <span class="math inline">\(V\)</span> are <span class="math inline">\(n \times n\)</span>, <span class="math inline">\(n \times p\)</span>, <span class="math inline">\(p \times p\)</span> and <span class="math inline">\(p \times n\)</span> matrices, respectively. Then <span class="math display">\[
   W^{-1} = A - AUO^{-1}VA,
 \]</span> where <span class="math inline">\(O = B + VAU\)</span> (a <span class="math inline">\(p \times p\)</span> matrix), and <span class="math display">\[
   |W| = |O||A|^{-1}|B|^{-1}.
-\]</span> These two relationships are often called the <a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury matrix identity</a> and the <a href="https://en.wikipedia.org/wiki/Matrix_determinant_lemma">matrix determinant lemma</a>, respectively. When <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are both very sparse, or <span class="math inline">\(A\)</span> is sparse (or even diagonal) and <span class="math inline">\(p\)</span> is much smaller than <span class="math inline">\(n\)</span>, manipulating the matrices via these relationships rather than forming <span class="math inline">\(W\)</span> directly can lead to massive computational savings. A symmetric special case is given by <span class="math display">\[
+\]</span> These two relationships are often called the <a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity" class="external-link">Woodbury matrix identity</a> and the <a href="https://en.wikipedia.org/wiki/Matrix_determinant_lemma" class="external-link">matrix determinant lemma</a>, respectively. When <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> are both very sparse, or <span class="math inline">\(A\)</span> is sparse (or even diagonal) and <span class="math inline">\(p\)</span> is much smaller than <span class="math inline">\(n\)</span>, manipulating the matrices via these relationships rather than forming <span class="math inline">\(W\)</span> directly can lead to massive computational savings. A symmetric special case is given by <span class="math display">\[
   W = A^{-1} + XB^{-1}X',
 \]</span> where <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> must now be symmetric, and <span class="math inline">\(X\)</span> is an <span class="math inline">\(n \times p\)</span> matrix.</p>
-<p>This package provides a class, <code>WoodburyMatrix</code>, to help in using these identities. <code>WoodburyMatrix</code> is a subclass the <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html">Matrix::Matrix</a></code> class, and has two subtypes, <code>GWoodburyMatrix</code> for general matrices, and <code>SWoodburyMatrix</code> for symmetric matrices. A <code>WoodburyMatrix</code> can be formed by providing the matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (with <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> defaulting to identity matrices) to the <code><a href="../reference/WoodburyMatrix.html">WoodburyMatrix(...)</a></code> function:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Matrix</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">WoodburyMatrix</span>)
-
-<span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">20200721</span>)
-
-<span class="no">A1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="fl">500</span>, <span class="fl">500</span>, <span class="fl">0.05</span>)
-<span class="no">B1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="fl">500</span>, <span class="fl">500</span>, <span class="fl">0.05</span>)
-<span class="no">W1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span>(<span class="no">A1</span>, <span class="no">B1</span>)</pre></body></html></div>
-<p>The matrices <code>A</code>, <code>B</code>, <code>U</code> and <code>V</code> are cast to <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html">Matrix::Matrix</a></code>, so they can be dense or sparse, diagonal, triagonal, or any of the many subtypes available in the Matrix package. The symmetric form can be used with <code>symmetric = TRUE</code>, with the new restriction that <code>A</code> and <code>B</code> must be symmetric:</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">A2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html">crossprod</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="fl">500</span>, <span class="fl">500</span>, <span class="fl">0.05</span>))
-<span class="no">B2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html">crossprod</a></span>(<span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="fl">500</span>, <span class="fl">500</span>, <span class="fl">0.05</span>))
-<span class="no">W2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span>(<span class="no">A2</span>, <span class="no">B2</span>, <span class="kw">symmetric</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
+<p>This package provides a class, <code>WoodburyMatrix</code>, to help in using these identities. <code>WoodburyMatrix</code> is a subclass the <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html" class="external-link">Matrix::Matrix</a></code> class, and has two subtypes, <code>GWoodburyMatrix</code> for general matrices, and <code>SWoodburyMatrix</code> for symmetric matrices. A <code>WoodburyMatrix</code> can be formed by providing the matrices <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> (with <span class="math inline">\(U\)</span> and <span class="math inline">\(V\)</span> defaulting to identity matrices) to the <code>WoodburyMatrix(...)</code> function:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mbertolacci/WoodburyMatrix" class="external-link">WoodburyMatrix</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">20200721</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">A1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">500</span>, <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">B1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">500</span>, <span class="fl">0.05</span><span class="op">)</span></span>
+<span><span class="va">W1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span><span class="op">(</span><span class="va">A1</span>, <span class="va">B1</span><span class="op">)</span></span></code></pre></div>
+<p>The matrices <code>A</code>, <code>B</code>, <code>U</code> and <code>V</code> are cast to <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html" class="external-link">Matrix::Matrix</a></code>, so they can be dense or sparse, diagonal, triagonal, or any of the many subtypes available in the Matrix package. The symmetric form can be used with <code>symmetric = TRUE</code>, with the new restriction that <code>A</code> and <code>B</code> must be symmetric:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">A2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">crossprod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">500</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">B2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">crossprod</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">500</span>, <span class="fl">0.05</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">W2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span><span class="op">(</span><span class="va">A2</span>, <span class="va">B2</span>, symmetric <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>Some attempt is also made at automatic symmetric detection (see the <code>WoodburyMatrix</code> function documentation), but it is always best to explicitly provide <code>symmetric = TRUE</code> if you know the matrices are symmetric.</p>
 <p>The following methods are defined for all <code>WoodburyMatrix</code> objects:</p>
 <ul>
 <li>
-<code><a href="../reference/instantiate.html">instantiate(W)</a></code>: forms the implicitly defined matrix <code>W</code>. This is usually not a good idea, because the matrix can be very large and this operation very slow;</li>
+<code>instantiate(W)</code>: forms the implicitly defined matrix <code>W</code>. This is usually not a good idea, because the matrix can be very large and this operation very slow;</li>
 <li>
-<code><a href="https://rdrr.io/r/base/t.html">t(W)</a></code>: transpose of the matrix, returning another <code>WoodburyMatrix</code>;</li>
+<code>t(W)</code>: transpose of the matrix, returning another <code>WoodburyMatrix</code>;</li>
 <li>
-<code><a href="../reference/solve-methods.html">solve(W)</a></code>: returns the inverse of <code>W</code> - not recommended in general because this will usually be dense;</li>
+<code>solve(W)</code>: returns the inverse of <code>W</code> - not recommended in general because this will usually be dense;</li>
 <li>
-<code><a href="../reference/solve-methods.html">solve(W, b)</a></code>: solves the system <code>Wx = b</code> for <code>x</code>; can be much faster than doing this directly for large, sparse <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>;</li>
+<code>solve(W, b)</code>: solves the system <code>Wx = b</code> for <code>x</code>; can be much faster than doing this directly for large, sparse <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>;</li>
 <li>
-<code><a href="https://rdrr.io/r/base/det.html">determinant(W)</a></code>: returns the log determinant of <code>W</code>, again much faster than a direct method;</li>
+<code>determinant(W)</code>: returns the log determinant of <code>W</code>, again much faster than a direct method;</li>
 <li>
 <code>W %*% x</code>: the matrix product of <code>W</code> and <code>x</code>, where <code>x</code> can be any object for which <code>solve</code> is defined for submatrices <code>A</code> and <code>B</code> (most typically, a numeric vector);</li>
-<li>various other methods inherited from <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html">Matrix::Matrix</a></code> also work, including <code>dim</code>, <code>dimnames</code>, <code>nrow</code>, <code>ncol</code>, <code>crossprod</code>, and <code>tcrossprod</code>.</li>
+<li>various other methods inherited from <code><a href="https://rdrr.io/pkg/Matrix/man/Matrix.html" class="external-link">Matrix::Matrix</a></code> also work, including <code>dim</code>, <code>dimnames</code>, <code>nrow</code>, <code>ncol</code>, <code>crossprod</code>, and <code>tcrossprod</code>.</li>
 </ul>
 <p><code>SWoodburyMatrix</code> objects additionally have the following methods:</p>
 <ul>
 <li>
-<code><a href="../reference/mahalanobis.html">mahalanobis(x, center, cov)</a></code>: where <code>cov</code> is a <code>SWoodburyMatrix</code>; calculate the Mahalanobis distance;</li>
+<code>mahalanobis(x, center, cov)</code>: where <code>cov</code> is a <code>SWoodburyMatrix</code>; calculate the Mahalanobis distance;</li>
 <li>
-<code><a href="../reference/normal-distribution-methods.html">dwnorm(x, mean, covariance, log)</a></code>: calculates the (log-) density of a multivariate normal distribution with an <code>SWoodburyMatrix</code> object as covariance;</li>
+<code>dwnorm(x, mean, covariance, log)</code>: calculates the (log-) density of a multivariate normal distribution with an <code>SWoodburyMatrix</code> object as covariance;</li>
 <li>
-<code><a href="../reference/normal-distribution-methods.html">rwnorm(n, mean, covariance)</a></code>: draws samples from a multivariate normal distribution with an <code>SWoodburyMatrix</code> object as covariance.</li>
+<code>rwnorm(n, mean, covariance)</code>: draws samples from a multivariate normal distribution with an <code>SWoodburyMatrix</code> object as covariance.</li>
 </ul>
 </div>
-<div id="example-1-marginalising-bayesian-linear-regression" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-1-marginalising-bayesian-linear-regression" class="anchor"></a>Example 1: marginalising Bayesian linear regression</h2>
+<div class="section level2">
+<h2 id="example-1-marginalising-bayesian-linear-regression">Example 1: marginalising Bayesian linear regression<a class="anchor" aria-label="anchor" href="#example-1-marginalising-bayesian-linear-regression"></a>
+</h2>
 <p>A very common example in which this technique applies is Bayesian linear regression, when <span class="math display">\[
   \begin{aligned}
     (Y \mid \beta) &amp; \sim N(X\beta, \sigma^2 I_n), \\
@@ -157,45 +155,49 @@
   p(Y) = (2\pi)^{-n/2} |\Sigma_Y|^{-1/2} \exp\left\{ -\frac{1}{2} (Y - X\mu_\beta)' \Sigma^{-1}_Y  (Y - X\mu_\beta) \right\}.
 \]</span> For most <span class="math inline">\(X\)</span> and <span class="math inline">\(Q_\beta\)</span>, the covariance <span class="math inline">\(\Sigma_Y\)</span> is very dense, so for large <span class="math inline">\(n\)</span> using this expression is infeasible. But the expression for <span class="math inline">\(\Sigma_Y\)</span> can be mapped to the Woodbury matrix identity via <span class="math inline">\(A \to \sigma^{-2} I_n\)</span>, <span class="math inline">\(B \to Q_\beta\)</span> and <span class="math inline">\(X \to X\)</span>, which facilitates computation of the density by requiring inversion only of the <span class="math inline">\(p \times p\)</span> matrix <span class="math inline">\(O\)</span>.</p>
 <p>Suppose <span class="math inline">\(n = 1000\)</span>, <span class="math inline">\(p = 20\)</span>, <span class="math inline">\(\sigma^2 = 1\)</span>, <span class="math inline">\(Q_\beta = I_p\)</span>, <span class="math inline">\(\mu_\beta = \mathbf{0}\)</span> and <span class="math inline">\(X\)</span> is composed of random entries. We can code this example and form a <code>WoodburyMatrix</code> for <span class="math inline">\(\Sigma_Y\)</span> using:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">n</span> <span class="kw">&lt;-</span> <span class="fl">2000</span>
-<span class="no">p</span> <span class="kw">&lt;-</span> <span class="fl">20</span>
-<span class="no">sigma_squared</span> <span class="kw">&lt;-</span> <span class="fl">1</span>
-<span class="no">X</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="no">n</span> * <span class="no">p</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="no">n</span>)
-<span class="no">Q_beta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/Diagonal.html">Diagonal</a></span>(<span class="no">p</span>)
-<span class="no">mu_beta</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">0</span>, <span class="no">p</span>)
-
-<span class="no">Sigma_Y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span>(
-  <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/Diagonal.html">Diagonal</a></span>(<span class="no">n</span>, <span class="fl">1</span> / <span class="no">sigma_squared</span>),
-  <span class="no">Q_beta</span>,
-  <span class="kw">X</span> <span class="kw">=</span> <span class="no">X</span>
-)</pre></body></html></div>
-<p>Now compare the size of <code>Sigma_Y</code> versus directly forming this matrix (which can be done using the <code><a href="../reference/instantiate.html">instantiate(.)</a></code> function):</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">Sigma_Y_direct</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/instantiate.html">instantiate</a></span>(<span class="no">Sigma_Y</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/object.size.html">object.size</a></span>(<span class="no">Sigma_Y</span>)
-<span class="co">#&gt; 329952 bytes</span>
-<span class="fu"><a href="https://rdrr.io/r/utils/object.size.html">object.size</a></span>(<span class="fu"><a href="../reference/instantiate.html">instantiate</a></span>(<span class="no">Sigma_Y</span>))
-<span class="co">#&gt; 32001400 bytes</span></pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">20</span></span>
+<span><span class="va">sigma_squared</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">X</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span> <span class="op">*</span> <span class="va">p</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">Q_beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/Diagonal.html" class="external-link">Diagonal</a></span><span class="op">(</span><span class="va">p</span><span class="op">)</span></span>
+<span><span class="va">mu_beta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">p</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Sigma_Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/Diagonal.html" class="external-link">Diagonal</a></span><span class="op">(</span><span class="va">n</span>, <span class="fl">1</span> <span class="op">/</span> <span class="va">sigma_squared</span><span class="op">)</span>,</span>
+<span>  <span class="va">Q_beta</span>,</span>
+<span>  X <span class="op">=</span> <span class="va">X</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Now compare the size of <code>Sigma_Y</code> versus directly forming this matrix (which can be done using the <code>instantiate(.)</code> function):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Sigma_Y_direct</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/instantiate.html">instantiate</a></span><span class="op">(</span><span class="va">Sigma_Y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/object.size.html" class="external-link">object.size</a></span><span class="op">(</span><span class="va">Sigma_Y</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 329952 bytes</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/object.size.html" class="external-link">object.size</a></span><span class="op">(</span><span class="fu"><a href="../reference/instantiate.html">instantiate</a></span><span class="op">(</span><span class="va">Sigma_Y</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; 32001400 bytes</span></span></code></pre></div>
 <p>The <code>WoodburyMatrix</code> object is much smaller. You can draw samples from this distribution using the function <code>rwnorm</code>, and calculate its log density using <code>dwnorm</code>:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">Y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/normal-distribution-methods.html">rwnorm</a></span>(<span class="fl">1</span>, <span class="no">X</span> <span class="kw">%*%</span> <span class="no">mu_beta</span>, <span class="no">Sigma_Y</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/normal-distribution-methods.html">dwnorm</a></span>(<span class="no">Y</span>, <span class="no">X</span> <span class="kw">%*%</span> <span class="no">mu_beta</span>, <span class="no">Sigma_Y</span>, <span class="kw">log</span> <span class="kw">=</span> <span class="fl">TRUE</span>)))
-<span class="co">#&gt; [1] -2902.92</span>
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.011   0.000   0.012</span></pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normal-distribution-methods.html">rwnorm</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">X</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">mu_beta</span>, <span class="va">Sigma_Y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/normal-distribution-methods.html">dwnorm</a></span><span class="op">(</span><span class="va">Y</span>, <span class="va">X</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">mu_beta</span>, <span class="va">Sigma_Y</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -2902.92</span></span>
+<span><span class="co">#&gt;    user  system elapsed </span></span>
+<span><span class="co">#&gt;   0.006   0.000   0.006</span></span></code></pre></div>
 <p>Compare the time this takes to the direct version:</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">Y_m</span> <span class="kw">&lt;-</span> <span class="no">Y</span> - <span class="no">X</span> <span class="kw">%*%</span> <span class="no">mu_beta</span>
-<span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(
-  - <span class="fl">0.5</span> * <span class="no">n</span> * <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span>(<span class="fl">2</span> * <span class="no">pi</span>)
-  - <span class="fl">0.5</span> * <span class="fu"><a href="https://rdrr.io/r/base/det.html">determinant</a></span>(<span class="no">Sigma_Y_direct</span>)$<span class="no">modulus</span>
-  - <span class="fl">0.5</span> * <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html">crossprod</a></span>(<span class="no">Y_m</span>, <span class="fu"><a href="../reference/solve-methods.html">solve</a></span>(<span class="no">Sigma_Y_direct</span>, <span class="no">Y_m</span>))
-)))
-<span class="co">#&gt; [1] -2902.92</span>
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.892   0.118   0.585</span></pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Y_m</span> <span class="op">&lt;-</span> <span class="va">Y</span> <span class="op">-</span> <span class="va">X</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">mu_beta</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span></span>
+<span>  <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="va">n</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html" class="external-link">log</a></span><span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">pi</span><span class="op">)</span></span>
+<span>  <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/det.html" class="external-link">determinant</a></span><span class="op">(</span><span class="va">Sigma_Y_direct</span><span class="op">)</span><span class="op">$</span><span class="va">modulus</span></span>
+<span>  <span class="op">-</span> <span class="fl">0.5</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/matrix-products.html" class="external-link">crossprod</a></span><span class="op">(</span><span class="va">Y_m</span>, <span class="fu"><a href="../reference/solve-methods.html">solve</a></span><span class="op">(</span><span class="va">Sigma_Y_direct</span>, <span class="va">Y_m</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -2902.92</span></span>
+<span><span class="co">#&gt;    user  system elapsed </span></span>
+<span><span class="co">#&gt;   2.273   0.026   2.330</span></span></code></pre></div>
 <p>For large <span class="math inline">\(n\)</span> the direct version would be completely infeasible.</p>
 </div>
-<div id="example-2-sums-of-sparse-precision-matrices" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-2-sums-of-sparse-precision-matrices" class="anchor"></a>Example 2: sums of sparse precision matrices</h2>
+<div class="section level2">
+<h2 id="example-2-sums-of-sparse-precision-matrices">Example 2: sums of sparse precision matrices<a class="anchor" aria-label="anchor" href="#example-2-sums-of-sparse-precision-matrices"></a>
+</h2>
 <p>A related example, also from statistics, involves a sum of two other vectors having multivariate normal distributions, each with sparse precision matrices: <span class="math display">\[
   \begin{aligned}
     Y &amp; = Y_1 + Y_2, \\
@@ -217,68 +219,73 @@
            &amp;            &amp;            &amp;        &amp; -\rho      &amp; 1
   \end{pmatrix},
 \]</span> which is very sparse for large <span class="math inline">\(n\)</span>. Of course, the precision matrix for <span class="math inline">\(Y_2\)</span>, <span class="math inline">\(Q_2 = \sigma^{-2} I_n\)</span>, is also sparse. For <span class="math inline">\(n = 10000\)</span>, <span class="math inline">\(\rho = 0.95\)</span>, <span class="math inline">\(\sigma^2 = 1\)</span> this can be coded as</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">n</span> <span class="kw">&lt;-</span> <span class="fl">10000</span>
-<span class="no">rho</span> <span class="kw">&lt;-</span> <span class="fl">0.95</span>
-<span class="no">Q_1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/bandSparse.html">bandSparse</a></span>(
-  <span class="no">n</span>,
-  <span class="kw">diagonals</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span> + <span class="no">rho</span> ^ <span class="fl">2</span>, <span class="no">n</span> - <span class="fl">2</span>), <span class="fl">1</span>),
-    <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(-<span class="no">rho</span>, <span class="no">n</span> - <span class="fl">1</span>)
-  ),
-  <span class="kw">k</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">1</span>),
-  <span class="kw">symmetric</span> <span class="kw">=</span> <span class="fl">TRUE</span>
-)
-<span class="no">Q_2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/Diagonal.html">Diagonal</a></span>(<span class="no">n</span>)
-
-<span class="no">Sigma_Y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span>(<span class="no">Q_1</span>, <span class="no">Q_2</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">10000</span></span>
+<span><span class="va">rho</span> <span class="op">&lt;-</span> <span class="fl">0.95</span></span>
+<span><span class="va">Q_1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/bandSparse.html" class="external-link">bandSparse</a></span><span class="op">(</span></span>
+<span>  <span class="va">n</span>,</span>
+<span>  diagonals <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">rho</span> <span class="op">^</span> <span class="fl">2</span>, <span class="va">n</span> <span class="op">-</span> <span class="fl">2</span><span class="op">)</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="op">-</span><span class="va">rho</span>, <span class="va">n</span> <span class="op">-</span> <span class="fl">1</span><span class="op">)</span></span>
+<span>  <span class="op">)</span>,</span>
+<span>  k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  symmetric <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">Q_2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/Diagonal.html" class="external-link">Diagonal</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Sigma_Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span><span class="op">(</span><span class="va">Q_1</span>, <span class="va">Q_2</span><span class="op">)</span></span></code></pre></div>
 <p>Incidentally, the automatic symmetry detection worked here, so we didn’t have to specify <code>symmetric = TRUE</code>:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/isSymmetric.html">isSymmetric</a></span>(<span class="no">Sigma_Y</span>))
-<span class="co">#&gt; [1] TRUE</span></pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/isSymmetric.html" class="external-link">isSymmetric</a></span><span class="op">(</span><span class="va">Sigma_Y</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] TRUE</span></span></code></pre></div>
 <p>We can draw a sample of <span class="math inline">\(Y\)</span>, and plot it:</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">Y</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/normal-distribution-methods.html">rwnorm</a></span>(<span class="fl">1</span>, <span class="kw">covariance</span> <span class="kw">=</span> <span class="no">Sigma_Y</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">Y</span>, <span class="kw">type</span> <span class="kw">=</span> <span class="st">'l'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/normal-distribution-methods.html">rwnorm</a></span><span class="op">(</span><span class="fl">1</span>, covariance <span class="op">=</span> <span class="va">Sigma_Y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">Y</span>, type <span class="op">=</span> <span class="st">'l'</span><span class="op">)</span></span></code></pre></div>
 <p><img src="WoodburyMatrix_files/figure-html/unnamed-chunk-10-1.png" width="700"></p>
 <p>And finally we can calculate the log density of the sample very efficiently:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/system.time.html">system.time</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="../reference/normal-distribution-methods.html">dwnorm</a></span>(<span class="no">Y</span>, <span class="kw">covariance</span> <span class="kw">=</span> <span class="no">Sigma_Y</span>, <span class="kw">log</span> <span class="kw">=</span> <span class="fl">TRUE</span>)))
-<span class="co">#&gt; [1] -18822.09</span>
-<span class="co">#&gt;    user  system elapsed </span>
-<span class="co">#&gt;   0.028   0.000   0.031</span></pre></body></html></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="../reference/normal-distribution-methods.html">dwnorm</a></span><span class="op">(</span><span class="va">Y</span>, covariance <span class="op">=</span> <span class="va">Sigma_Y</span>, log <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] -18822.09</span></span>
+<span><span class="co">#&gt;    user  system elapsed </span></span>
+<span><span class="co">#&gt;   0.018   0.001   0.019</span></span></code></pre></div>
 </div>
-<div id="multiple-b-matrices" class="section level2">
-<h2 class="hasAnchor">
-<a href="#multiple-b-matrices" class="anchor"></a>Multiple <span class="math inline">\(B\)</span> matrices</h2>
+<div class="section level2">
+<h2 id="multiple-b-matrices">Multiple <span class="math inline">\(B\)</span> matrices<a class="anchor" aria-label="anchor" href="#multiple-b-matrices"></a>
+</h2>
 <p>A more general form allows for multiple <span class="math inline">\(B\)</span> matrices: <span class="math display">\[
   W = A^{-1} + \sum_{i = 1}^k U_i B_i^{-1} V_i,
 \]</span> and analogously for the symmetric form. You can use this form by providing a list of matrices as the <code>B</code> (or <code>U</code>, <code>V</code> or <code>X</code>) arguments. Internally, this is implemented by converting to the standard form by letting <code>B = bdiag(...the B matrices...)</code>, <code>U = cbind(..the U matrices...)</code>, and so on. Here is an example involving two <code>B</code> matrices of varying sizes:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">n</span> <span class="kw">&lt;-</span> <span class="fl">500</span>
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fl">50</span>
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fl">10</span>
-<span class="no">A</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="no">n</span>, <span class="no">n</span>, <span class="fl">0.5</span>)
-<span class="no">B1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="no">p1</span>, <span class="no">p1</span>, <span class="fl">0.9</span>)
-<span class="no">B2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="no">p2</span>, <span class="no">p2</span>, <span class="fl">0.9</span>)
-<span class="no">U1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="no">n</span>, <span class="no">p1</span>, <span class="fl">0.9</span>)
-<span class="no">U2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html">rsparsematrix</a></span>(<span class="no">n</span>, <span class="no">p2</span>, <span class="fl">0.9</span>)
-<span class="no">W</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span>(<span class="no">A</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">B1</span>, <span class="no">B2</span>), <span class="kw">U</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="no">U1</span>, <span class="no">U2</span>), <span class="kw">V</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="no">U1</span>), <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="no">U2</span>)))
-<span class="no">b</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html">rnorm</a></span>(<span class="no">n</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="fu"><a href="../reference/solve-methods.html">solve</a></span>(<span class="no">W</span>, <span class="no">b</span>))
-<span class="co">#&gt; Formal class 'dgeMatrix' [package "Matrix"] with 4 slots</span>
-<span class="co">#&gt;   ..@ x       : num [1:500] 99.8 -103.1 -129.5 137.7 98.5 ...</span>
-<span class="co">#&gt;   ..@ Dim     : int [1:2] 500 1</span>
-<span class="co">#&gt;   ..@ Dimnames:List of 2</span>
-<span class="co">#&gt;   .. ..$ : NULL</span>
-<span class="co">#&gt;   .. ..$ : NULL</span>
-<span class="co">#&gt;   ..@ factors : list()</span></pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fl">500</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fl">10</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">n</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="va">B1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p1</span>, <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="va">B2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="va">p2</span>, <span class="va">p2</span>, <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="va">U1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">p1</span>, <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="va">U2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/Matrix/man/rsparsematrix.html" class="external-link">rsparsematrix</a></span><span class="op">(</span><span class="va">n</span>, <span class="va">p2</span>, <span class="fl">0.9</span><span class="op">)</span></span>
+<span><span class="va">W</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/WoodburyMatrix.html">WoodburyMatrix</a></span><span class="op">(</span><span class="va">A</span>, <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">B1</span>, <span class="va">B2</span><span class="op">)</span>, U <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">U1</span>, <span class="va">U2</span><span class="op">)</span>, V <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">U1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">U2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu"><a href="../reference/solve-methods.html">solve</a></span><span class="op">(</span><span class="va">W</span>, <span class="va">b</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Formal class 'dgeMatrix' [package "Matrix"] with 4 slots</span></span>
+<span><span class="co">#&gt;   ..@ Dim     : int [1:2] 500 1</span></span>
+<span><span class="co">#&gt;   ..@ Dimnames:List of 2</span></span>
+<span><span class="co">#&gt;   .. ..$ : NULL</span></span>
+<span><span class="co">#&gt;   .. ..$ : NULL</span></span>
+<span><span class="co">#&gt;   ..@ x       : num [1:500] 99.8 -103.1 -129.5 137.7 98.5 ...</span></span>
+<span><span class="co">#&gt;   ..@ factors : list()</span></span></code></pre></div>
 </div>
-<div id="implementation-notes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#implementation-notes" class="anchor"></a>Implementation notes</h2>
+<div class="section level2">
+<h2 id="implementation-notes">Implementation notes<a class="anchor" aria-label="anchor" href="#implementation-notes"></a>
+</h2>
 <p>For both general and symmetric matrices, heavy implicit use is made of the fact that the Matrix package caches matrix factorisations. This means that, generally speaking, the heavy lifting of decomposing the matrices is done on the first operation like <code>solve</code> or <code>determinant</code>, and subsequent calls are much faster.</p>
 </div>
-<div id="bibliography" class="section level2">
-<h2 class="hasAnchor">
-<a href="#bibliography" class="anchor"></a>Bibliography</h2>
+<div class="section level2">
+<h2 id="bibliography">Bibliography<a class="anchor" aria-label="anchor" href="#bibliography"></a>
+</h2>
 <p>Max A. Woodbury, <em>Inverting modified matrices</em>, Memorandum Rept. 42, Statistical Research Group, Princeton University, Princeton, NJ, 1950, 4pp</p>
-<p>See also the Wikipedia pages for the <a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity">Woodbury matrix identity</a> and the <a href="https://en.wikipedia.org/wiki/Matrix_determinant_lemma">Matrix determinant lemma</a>.</p>
+<p>See also the Wikipedia pages for the <a href="https://en.wikipedia.org/wiki/Woodbury_matrix_identity" class="external-link">Woodbury matrix identity</a> and the <a href="https://en.wikipedia.org/wiki/Matrix_determinant_lemma" class="external-link">Matrix determinant lemma</a>.</p>
 </div>
   </div>
 
@@ -293,11 +300,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Michael Bertolacci.</p>
+  <p></p>
+<p>Developed by Michael Bertolacci.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer>
@@ -305,6 +314,8 @@
 
   
 
+
+  
 
   </body>
 </html>
