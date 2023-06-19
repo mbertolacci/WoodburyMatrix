@@ -2,7 +2,7 @@
 
 [![CRAN
 status](https://www.r-pkg.org/badges/version/WoodburyMatrix)](https://cran.r-project.org/package=WoodburyMatrix)
-[![R-CMD-check](https://github.com/mbertolacci/WoodburyMatrix/workflows/R-CMD-check/badge.svg)](https://github.com/mbertolacci/WoodburyMatrix/actions)
+[![R-CMD-check](https://github.com/mbertolacci/WoodburyMatrix/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/mbertolacci/WoodburyMatrix/actions/workflows/R-CMD-check.yaml)
 [![Coverage status](https://codecov.io/gh/mbertolacci/WoodburyMatrix/branch/master/graph/badge.svg)](https://codecov.io/github/mbertolacci/WoodburyMatrix?branch=master)
 
 ## Overview
