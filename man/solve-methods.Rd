@@ -4,16 +4,28 @@
 \alias{solve-methods}
 \alias{solve}
 \alias{solve,GWoodburyMatrix,missing-method}
+\alias{solve,GWoodburyMatrix,numLike-method}
+\alias{solve,GWoodburyMatrix,matrix-method}
 \alias{solve,GWoodburyMatrix,ANY-method}
 \alias{solve,SWoodburyMatrix,missing-method}
+\alias{solve,SWoodburyMatrix,numLike-method}
+\alias{solve,SWoodburyMatrix,matrix-method}
 \alias{solve,SWoodburyMatrix,ANY-method}
 \title{Solve methods for \code{WoodburyMatrix} objects}
 \usage{
 \S4method{solve}{GWoodburyMatrix,missing}(a)
 
+\S4method{solve}{GWoodburyMatrix,numLike}(a, b)
+
+\S4method{solve}{GWoodburyMatrix,matrix}(a, b)
+
 \S4method{solve}{GWoodburyMatrix,ANY}(a, b)
 
 \S4method{solve}{SWoodburyMatrix,missing}(a)
+
+\S4method{solve}{SWoodburyMatrix,numLike}(a, b)
+
+\S4method{solve}{SWoodburyMatrix,matrix}(a, b)
 
 \S4method{solve}{SWoodburyMatrix,ANY}(a, b)
 }
@@ -26,9 +38,10 @@ submatrices \code{a@A} and \code{a@V} or \code{a@X} that define the
 }
 \value{
 The solution to the linear system, or the inverse of the matrix. The
-class of the return value will be a subclass of
-\code{\linkS4class{Matrix}}, with the specific subclass determined
-by \code{a} and \code{b}.
+class of the return value will be a vector if \code{b} is a vector, and may
+otherwise be either a regular matrix or a subclass of
+\code{\linkS4class{Matrix}}, with the specific subclass determined by
+\code{a} and \code{b}.
 }
 \description{
 Methods based on \code{\link{solve}} to solve a linear system of equations
@@ -44,9 +57,17 @@ from using an implicit representation of \code{a}.
 \itemize{
 \item \code{solve,GWoodburyMatrix,missing-method}: Invert the matrix
 
+\item \code{solve,GWoodburyMatrix,numLike-method}: Solve the linear system
+
+\item \code{solve,GWoodburyMatrix,matrix-method}: Solve the linear system
+
 \item \code{solve,GWoodburyMatrix,ANY-method}: Solve the linear system
 
 \item \code{solve,SWoodburyMatrix,missing-method}: Invert the symmetric matrix
+
+\item \code{solve,SWoodburyMatrix,numLike-method}: Solve the linear system
+
+\item \code{solve,SWoodburyMatrix,matrix-method}: Solve the linear system
 
 \item \code{solve,SWoodburyMatrix,ANY-method}: Solve the linear system
 }}
