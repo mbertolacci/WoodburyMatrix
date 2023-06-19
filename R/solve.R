@@ -16,11 +16,14 @@
 #' submatrices \code{a@A} and \code{a@V} or \code{a@X} that define the
 #' \code{WoodburyMatrix}).
 #' @returns The solution to the linear system, or the inverse of the matrix. The
-#' class of the return value will be a subclass of
-#' \code{\linkS4class{Matrix}}, with the specific subclass determined
-#' by \code{a} and \code{b}.
+#' class of the return value will be a vector if \code{b} is a vector, and may
+#' otherwise be either a regular matrix or a subclass of
+#' \code{\linkS4class{Matrix}}, with the specific subclass determined by
+#' \code{a} and \code{b}.
 #' @seealso \link{WoodburyMatrix}, \linkS4class{WoodburyMatrix}
 NULL
+
+setClassUnion('numLike', members = c('logical', 'numeric'))
 
 #' @describeIn solve-methods Invert the matrix
 #' @export
@@ -32,14 +35,38 @@ setMethod(
   }
 )
 
+.solve_b_base <- function(a, b) {
+  A_b <- a@A %*% b
+  A_b - a@A %*% a@U %*% solve(a@O, a@V %*% A_b)
+}
+
+#' @describeIn solve-methods Solve the linear system
+#' @export
+setMethod(
+  'solve',
+  signature(a = 'GWoodburyMatrix', b = 'numLike'),
+  function(a, b) {
+    drop(.solve_b_base(a, b))
+  }
+)
+
+#' @describeIn solve-methods Solve the linear system
+#' @export
+setMethod(
+  'solve',
+  signature(a = 'GWoodburyMatrix', b = 'matrix'),
+  function(a, b) {
+    .solve_b_base(a, b)
+  }
+)
+
 #' @describeIn solve-methods Solve the linear system
 #' @export
 setMethod(
   'solve',
   signature(a = 'GWoodburyMatrix', b = 'ANY'),
   function(a, b) {
-    A_b <- a@A %*% b
-    A_b - a@A %*% a@U %*% solve(a@O, a@V %*% A_b)
+    .solve_b_base(a, b)
   }
 )
 
@@ -54,13 +81,37 @@ setMethod(
   }
 )
 
+.solve_b_base_symmetric <- function(a, b) {
+  A_b <- a@A %*% b
+  A_b - a@A %*% a@X %*% solve(a@O, crossprod(a@X, A_b))
+}
+
+#' @describeIn solve-methods Solve the linear system
+#' @export
+setMethod(
+  'solve',
+  signature(a = 'SWoodburyMatrix', b = 'numLike'),
+  function(a, b) {
+    drop(.solve_b_base_symmetric(a, b))
+  }
+)
+
+#' @describeIn solve-methods Solve the linear system
+#' @export
+setMethod(
+  'solve',
+  signature(a = 'SWoodburyMatrix', b = 'matrix'),
+  function(a, b) {
+    .solve_b_base_symmetric(a, b)
+  }
+)
+
 #' @describeIn solve-methods Solve the linear system
 #' @export
 setMethod(
   'solve',
   signature(a = 'SWoodburyMatrix', b = 'ANY'),
   function(a, b) {
-    A_b <- a@A %*% b
-    A_b - a@A %*% a@X %*% solve(a@O, crossprod(a@X, A_b))
+    .solve_b_base_symmetric(a, b)
   }
 )

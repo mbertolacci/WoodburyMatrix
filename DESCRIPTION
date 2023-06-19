@@ -12,7 +12,7 @@ URL: https://github.com/mbertolacci/WoodburyMatrix
 BugReports: https://github.com/mbertolacci/WoodburyMatrix/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Imports:
     Matrix,
     methods

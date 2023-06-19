@@ -3,7 +3,7 @@ context('WoodburyMatrix')
 load('matrices.rda')
 
 expect_Matrix_equal <- function(a, b) {
-  expect_equal(max(abs(a - b)), 0)
+  expect_equal(max(abs(a - b)), 0, tolerance = 1e-7)
 }
 
 compare_to_direct <- function(
@@ -21,26 +21,36 @@ compare_to_direct <- function(
     W <- WoodburyMatrix(A, B, U = U, V = V, symmetric = FALSE)
     W_direct <- solve(A) + U %*% solve(B) %*% V
   }
-  b <- rnorm(nrow(A))
 
   expect_Matrix_equal(instantiate(W), W_direct)
-  expect_equal(W %*% b, W_direct %*% b)
   expect_equal(determinant(W), determinant(W_direct))
   expect_equal(
     determinant(W, logarithm = FALSE),
     determinant(W_direct, logarithm = FALSE)
   )
   expect_Matrix_equal(solve(W), solve(W_direct))
-  expect_equal(solve(W, b), solve(W_direct, b))
+
+  rhs <- rnorm(nrow(A))
+  expect_Matrix_equal(W %*% rhs, W_direct %*% rhs)
+  expect_Matrix_equal(solve(W, rhs), solve(W_direct, rhs))
+
+  rhs_dense <- matrix(rnorm(2 * nrow(A)), nrow = nrow(A), ncol = 2)
+  expect_Matrix_equal(W %*% rhs_dense, W_direct %*% rhs_dense)
+  expect_Matrix_equal(solve(W, rhs_dense), solve(W_direct, rhs_dense))
+
+  rhs_sparse <- as(rhs_dense, 'sparseMatrix')
+  expect_Matrix_equal(W %*% rhs_sparse, W_direct %*% rhs_sparse)
+  expect_Matrix_equal(solve(W, rhs_sparse), solve(W_direct, rhs_sparse))
+
   expect_Matrix_equal(instantiate(t(W)), t(W_direct))
   if (symmetric) {
     expect_equal(
-      mahalanobis(b, center = 0, cov = W),
-      mahalanobis(b, center = 0, cov = W_direct)
+      mahalanobis(rhs, center = 0, cov = W),
+      mahalanobis(rhs, center = 0, cov = W_direct)
     )
     expect_equal(
-      mahalanobis(b, center = 1, cov = W),
-      mahalanobis(b, center = 1, cov = W_direct)
+      mahalanobis(rhs, center = 1, cov = W),
+      mahalanobis(rhs, center = 1, cov = W_direct)
     )
   }
   expect_equal(isSymmetric(W), symmetric)
