@@ -1,15 +1,19 @@
-## WoodburyMatrix version 0.0.2
+## WoodburyMatrix version 0.0.3
 
-* Accomodate deprecation of non-virtual sub class coercions in Matrix 1.5
-* Accomodate deprecation of `with_defaults` in lintr
+* Slightly modify `solve` methods to conform with upcoming Matrix 1.6
+* Fix tests that fail under Matrix 1.6
 
 ## Test environments
 
-* macOS 10.16 with R version 4.2.1
-* Ubuntu 20.04.5 LTS with R versions 4.1.3, 4.2.1 and development
-* Windows Server x64 (build 20348) with R version 4.2.1
+* macOS 12.6.6 with R version 4.3.1
+* Ubuntu 22.04.2 LTS with R versions 4.2.3, 4.3.1 and development
+* Windows Server 2022 (build 20348) with R version 4.3.1
 
-Backwards compatibility with Matrix version 1.4.x has been verified.
+Backwards compatibility with Matrix version 1.5 has been verified.
+
+## Reverse dependencies
+
+There are no reverse dependencies to check.
 
 ## R CMD check results
 

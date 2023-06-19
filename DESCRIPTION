@@ -1,6 +1,6 @@
 Package: WoodburyMatrix
 Title: Fast Matrix Operations via the Woodbury Matrix Identity
-Version: 0.0.2
+Version: 0.0.3
 Authors@R:
     person(given = "Michael",
            family = "Bertolacci",
@@ -12,7 +12,7 @@ URL: https://github.com/mbertolacci/WoodburyMatrix
 BugReports: https://github.com/mbertolacci/WoodburyMatrix/issues
 License: MIT + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.2.3
+RoxygenNote: 7.1.0
 Imports:
     Matrix,
     methods
