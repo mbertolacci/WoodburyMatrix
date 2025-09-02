@@ -1,6 +1,6 @@
 Package: WoodburyMatrix
 Title: Fast Matrix Operations via the Woodbury Matrix Identity
-Version: 0.0.3
+Version: 0.0.4
 Authors@R:
     person(given = "Michael",
            family = "Bertolacci",
