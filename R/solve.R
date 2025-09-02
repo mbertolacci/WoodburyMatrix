@@ -18,8 +18,8 @@
 #' @returns The solution to the linear system, or the inverse of the matrix. The
 #' class of the return value will be a vector if \code{b} is a vector, and may
 #' otherwise be either a regular matrix or a subclass of
-#' \code{\linkS4class{Matrix}}, with the specific subclass determined by
-#' \code{a} and \code{b}.
+#' \code{\link[Matrix:Matrix-class]{Matrix}}, with the specific subclass determined
+#' by \code{a} and \code{b}.
 #' @seealso \link{WoodburyMatrix}, \linkS4class{WoodburyMatrix}
 NULL
 

@@ -25,11 +25,11 @@ of using an implicit representation.
 }
 \section{Functions}{
 \itemize{
-\item \code{instantiate,GWoodburyMatrix-method}: Method for general matrices.
+\item \code{instantiate(GWoodburyMatrix)}: Method for general matrices.
 
-\item \code{instantiate,SWoodburyMatrix-method}: Method for symmetric matrices.
+\item \code{instantiate(SWoodburyMatrix)}: Method for symmetric matrices.
+
 }}
-
 \seealso{
 \link{WoodburyMatrix}, \linkS4class{WoodburyMatrix}
 }

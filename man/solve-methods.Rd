@@ -40,8 +40,8 @@ submatrices \code{a@A} and \code{a@V} or \code{a@X} that define the
 The solution to the linear system, or the inverse of the matrix. The
 class of the return value will be a vector if \code{b} is a vector, and may
 otherwise be either a regular matrix or a subclass of
-\code{\linkS4class{Matrix}}, with the specific subclass determined by
-\code{a} and \code{b}.
+\code{\link[Matrix:Matrix-class]{Matrix}}, with the specific subclass determined
+by \code{a} and \code{b}.
 }
 \description{
 Methods based on \code{\link{solve}} to solve a linear system of equations
@@ -55,23 +55,23 @@ from using an implicit representation of \code{a}.
 }
 \section{Functions}{
 \itemize{
-\item \code{solve,GWoodburyMatrix,missing-method}: Invert the matrix
+\item \code{solve(a = GWoodburyMatrix, b = missing)}: Invert the matrix
 
-\item \code{solve,GWoodburyMatrix,numLike-method}: Solve the linear system
+\item \code{solve(a = GWoodburyMatrix, b = numLike)}: Solve the linear system
 
-\item \code{solve,GWoodburyMatrix,matrix-method}: Solve the linear system
+\item \code{solve(a = GWoodburyMatrix, b = matrix)}: Solve the linear system
 
-\item \code{solve,GWoodburyMatrix,ANY-method}: Solve the linear system
+\item \code{solve(a = GWoodburyMatrix, b = ANY)}: Solve the linear system
 
-\item \code{solve,SWoodburyMatrix,missing-method}: Invert the symmetric matrix
+\item \code{solve(a = SWoodburyMatrix, b = missing)}: Invert the symmetric matrix
 
-\item \code{solve,SWoodburyMatrix,numLike-method}: Solve the linear system
+\item \code{solve(a = SWoodburyMatrix, b = numLike)}: Solve the linear system
 
-\item \code{solve,SWoodburyMatrix,matrix-method}: Solve the linear system
+\item \code{solve(a = SWoodburyMatrix, b = matrix)}: Solve the linear system
 
-\item \code{solve,SWoodburyMatrix,ANY-method}: Solve the linear system
+\item \code{solve(a = SWoodburyMatrix, b = ANY)}: Solve the linear system
+
 }}
-
 \seealso{
 \link{WoodburyMatrix}, \linkS4class{WoodburyMatrix}
 }

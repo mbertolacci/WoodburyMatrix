@@ -65,8 +65,8 @@ the symmetric form in the following circumstances:
   \item \code{symmetry = TRUE}; or
   \item the argument \code{X} is provided; or
   \item \code{A} and \code{B} are symmetric (according to
-  \code{\link{isSymmetric}}) and the arguments \code{U} and \code{V} are
-  NOT provided.
+  \code{\link[Matrix]{isSymmetric}}) and the arguments \code{U} and
+  \code{V} are NOT provided.
 }
 }
 

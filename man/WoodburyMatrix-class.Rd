@@ -39,53 +39,53 @@ The \code{WoodburyMatrix} is a virtual class, contained by both
 (for symmetric matrices). See \link{WoodburyMatrix} for construction
 of these classes. The methods available for these classes are described
 below; see also the \link{solve} methods. This class is itself a subclass of
-\code{\linkS4class{Matrix}}, so basic matrix methods like \code{nrow},
-\code{ncol}, \code{dim} and so on also work.
+\code{\link[Matrix:Matrix-class]{Matrix}}, so basic matrix methods like
+\code{nrow}, \code{ncol}, \code{dim} and so on also work.
+
+Sub-class representing a generic matrix.
+
+Sub-class representing a symmetric matrix. Also subclasses
+\link[Matrix:symmetricMatrix-class]{symmetricMatrix}.
 }
 \section{Functions}{
 \itemize{
-\item \code{GWoodburyMatrix-class}: Sub-class representing a generic matrix.
-
-\item \code{SWoodburyMatrix-class}: Sub-class representing a symmetric matrix.
-Also subclasses \linkS4class{symmetricMatrix}.
-
-\item \code{isSymmetric,GWoodburyMatrix-method}: Check for symmetry of matrix; always returns
+\item \code{isSymmetric(GWoodburyMatrix)}: Check for symmetry of matrix; always returns
 \code{FALSE}.
 
-\item \code{isSymmetric,SWoodburyMatrix-method}: Check for symmetry of matrix; always returns
+\item \code{isSymmetric(SWoodburyMatrix)}: Check for symmetry of matrix; always returns
 \code{TRUE}.
 
-\item \code{\%*\%,GWoodburyMatrix,ANY-method}: Matrix multiplication (generally fast and
+\item \code{x \%*\% y}: Matrix multiplication (generally fast and
 
-\item \code{\%*\%,SWoodburyMatrix,ANY-method}: Matrix multiplication (generally fast and
+\item \code{x \%*\% y}: Matrix multiplication (generally fast and
 
-\item \code{t,GWoodburyMatrix-method}: Return the transpose of the matrix as
+\item \code{t(GWoodburyMatrix)}: Return the transpose of the matrix as
 another GWoodburyMatrix.
 
-\item \code{t,SWoodburyMatrix-method}: Does nothing, just returns \code{x}.
-}}
+\item \code{t(SWoodburyMatrix)}: Does nothing, just returns \code{x}.
 
+}}
 \section{Slots}{
 
 \describe{
-\item{\code{A}}{n x n subclass of \code{\linkS4class{Matrix}}
-(\code{GWoodburyMatrix}) or \code{\linkS4class{symmetricMatrix}}
+\item{\code{A}}{n x n subclass of \code{\link[Matrix:Matrix-class]{Matrix}}
+(\code{GWoodburyMatrix}) or \code{\link[Matrix:symmetricMatrix-class]{symmetricMatrix}}
 (\code{SWoodburyMatrix}).}
 
-\item{\code{B}}{p x p subclass of \code{\linkS4class{Matrix}}
-(\code{GWoodburyMatrix}) or \code{\linkS4class{symmetricMatrix}}
+\item{\code{B}}{p x p subclass of \code{\link[Matrix:Matrix-class]{Matrix}}
+(\code{GWoodburyMatrix}) or \code{\link[Matrix:symmetricMatrix-class]{symmetricMatrix}}
 (\code{SWoodburyMatrix}).}
 
-\item{\code{U}}{n x p subclass of \code{\linkS4class{Matrix}} (only for}
+\item{\code{U}}{n x p subclass of \code{\link[Matrix:Matrix-class]{Matrix}} (only for}
 
-\item{\code{V}}{p x m subclass of \code{\linkS4class{Matrix}} (only for}
+\item{\code{V}}{p x m subclass of \code{\link[Matrix:Matrix-class]{Matrix}} (only for}
 
-\item{\code{X}}{n x p subclass of \code{\linkS4class{Matrix}} (only for}
+\item{\code{X}}{n x p subclass of \code{\link[Matrix:Matrix-class]{Matrix}} (only for}
 
-\item{\code{O}}{p x p subclass of \code{\linkS4class{Matrix}}}
+\item{\code{O}}{p x p subclass of \code{\link[Matrix:Matrix-class]{Matrix}}}
 }}
 
 \seealso{
-\link{WoodburyMatrix} for object construction, \linkS4class{Matrix}
-(the parent of this class).
+\link{WoodburyMatrix} for object construction,
+\link[Matrix:Matrix-class]{Matrix} (the parent of this class).
 }

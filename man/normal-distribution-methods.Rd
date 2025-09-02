@@ -28,12 +28,12 @@ distribution with an \code{SWoodburyMatrix} object as its covariance matrix.
 }
 \section{Functions}{
 \itemize{
-\item \code{dwnorm}: Compute the density of the
+\item \code{dwnorm()}: Compute the density of the
 distribution
 
-\item \code{rwnorm}: Draw samples from the distribution
-}}
+\item \code{rwnorm()}: Draw samples from the distribution
 
+}}
 \examples{
 library(Matrix)
 # Trivial example with diagonal covariance matrices

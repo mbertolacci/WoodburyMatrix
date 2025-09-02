@@ -27,10 +27,10 @@ Generic for computing the squared Mahalanobis distance.
 }
 \section{Methods (by class)}{
 \itemize{
-\item \code{x = ANY,center = ANY,cov = SWoodburyMatrix}: Use the Woodbury matrix identity to compute the
+\item \code{mahalanobis(x = ANY, center = ANY, cov = SWoodburyMatrix)}: Use the Woodbury matrix identity to compute the
 squared Mahalanobis distance with the implicit matrix as the covariance.
-}}
 
+}}
 \seealso{
 \link[stats]{mahalanobis}
 }
